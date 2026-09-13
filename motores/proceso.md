@@ -198,3 +198,22 @@ CREATE TABLE receivable_payments (
 ```
 
 ![](images/clipboard-312231579.png)
+
+## creación de la tabla returns en la terminal dbeaver mysql
+
+``` sql
+CREATE TABLE returns (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sale_id INT NOT NULL,
+    return_date DATETIME NOT NULL,
+    reason TEXT NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-1201859032.png)
