@@ -42,3 +42,23 @@ CREATE TABLE suppliers (
 ```
 
 ![](images/clipboard-3004942745.png)
+
+## creación de la tabla purchaces en el terminal Dbeaver mysql
+
+``` sql
+CREATE TABLE purchases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    supplier_id INT NOT NULL,
+    purchase_date DATETIME NOT NULL,
+    subtotal DECIMAL(12,2) NOT NULL,
+    taxes DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+);
+```
+
+![](images/clipboard-1358966974.png)
