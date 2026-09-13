@@ -179,3 +179,22 @@ CREATE TABLE accounts_receivable (
 ```
 
 ![](images/clipboard-3100390865.png)
+
+## creacion de la tabla receivable_pyments en la terminal dbeaver mysql
+
+``` sql
+CREATE TABLE receivable_payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account_receivable_id INT NOT NULL,
+    payment_date DATETIME NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    notes TEXT,
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (account_receivable_id) REFERENCES accounts_receivable(id)
+);
+```
+
+![](images/clipboard-312231579.png)
