@@ -139,3 +139,24 @@ CREATE TABLE sales (
 ```
 
 ![](images/clipboard-2589085581.png)
+
+## creación de la tabla sale_details en la terminal de dbeaver mysql
+
+``` sql
+CREATE TABLE sale_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sale_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    unit_price DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    notes TEXT,
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-2208481574.png)
