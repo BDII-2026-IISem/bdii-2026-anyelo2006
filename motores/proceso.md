@@ -62,3 +62,24 @@ CREATE TABLE purchases (
 ```
 
 ![](images/clipboard-1358966974.png)
+
+## creación de la tabla parchease_details en la terminal dbeaver mysql
+
+``` sql
+CREATE TABLE purchase_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    purchase_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    unit_price DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    notes TEXT,
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES purchases(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-3124421861.png)
