@@ -160,3 +160,22 @@ CREATE TABLE sale_details (
 ```
 
 ![](images/clipboard-2208481574.png)
+
+## creación de la tabla accounts_receivable en la terminal dbeaver mysql
+
+``` sql
+CREATE TABLE accounts_receivable (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sale_id INT NOT NULL UNIQUE,
+    issue_date DATETIME NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    notes TEXT,
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-3100390865.png)
