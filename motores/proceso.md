@@ -83,3 +83,21 @@ CREATE TABLE purchase_details (
 ```
 
 ![](images/clipboard-3124421861.png)
+
+## creación de la tabla inventories en la terminal dbeaver mysql
+
+``` sql
+CREATE TABLE inventories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    location_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    minimum_stock INT NOT NULL,
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-3712426370.png)
