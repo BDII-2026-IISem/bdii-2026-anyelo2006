@@ -101,3 +101,21 @@ CREATE TABLE inventories (
 ```
 
 ![](images/clipboard-3712426370.png)
+
+## creación de la tabla customers en la terminal de dbeaver mysql
+
+``` sql
+CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    document_type VARCHAR(20) NOT NULL,
+    document_number VARCHAR(30) NOT NULL UNIQUE,
+    full_name VARCHAR(150) NOT NULL,
+    phone VARCHAR(30),
+    email VARCHAR(100),
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+```
+
+![](images/clipboard-1812522684.png)
