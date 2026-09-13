@@ -24,3 +24,21 @@ CREATE TABLE products (
 ```
 
 ![](images/clipboard-2551221203.png)
+
+## creación de la tabla suppliers en la terminal Dbeaver mysql
+
+``` sql
+CREATE TABLE suppliers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nit VARCHAR(30) NOT NULL UNIQUE,
+    company_name VARCHAR(150) NOT NULL,
+    contact_person VARCHAR(100),
+    phone VARCHAR(30),
+    email VARCHAR(100),
+    status ENUM('active','inactive'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+```
+
+![](images/clipboard-3004942745.png)
