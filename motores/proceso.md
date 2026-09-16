@@ -217,3 +217,7 @@ CREATE TABLE returns (
 ```
 
 ![](images/clipboard-1201859032.png)
+
+## creación de la base de datos en el gestor workbench
+
+![](images/clipboard-3702421125.png)
