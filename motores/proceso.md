@@ -233,3 +233,7 @@ CREATE TABLE returns (
 ## creación de la tabla purchases  en workbench
 
 ![](images/clipboard-3407294112.png)
+
+## creación de la tabla parchease_details   en workbench
+
+![](images/clipboard-1755828797.png)
