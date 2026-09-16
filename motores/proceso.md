@@ -230,4 +230,6 @@ CREATE TABLE returns (
 
 ![](images/clipboard-284856169.png)
 
-## 
+## creación de la tabla purchases  en workbench
+
+![](images/clipboard-3407294112.png)
