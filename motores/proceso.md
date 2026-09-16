@@ -225,3 +225,9 @@ CREATE TABLE returns (
 ## creación de la tabla products en workbench
 
 ![](images/clipboard-1982452136.png)
+
+## creación de la tabla suppliers  en workbench
+
+![](images/clipboard-284856169.png)
+
+## 
