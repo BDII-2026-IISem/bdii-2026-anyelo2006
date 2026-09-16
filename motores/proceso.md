@@ -221,3 +221,7 @@ CREATE TABLE returns (
 ## creación de la base de datos en el gestor workbench
 
 ![](images/clipboard-3702421125.png)
+
+## creación de la tabla products en workbench
+
+![](images/clipboard-1982452136.png)
