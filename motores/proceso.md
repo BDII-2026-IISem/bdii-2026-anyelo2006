@@ -505,3 +505,7 @@ CREATE TABLE returns (
 ## creación de la tabla purchase_details en pgadmin
 
 ![](images/clipboard-994996476.png)
+
+## creación de la tabla  inventories en pgadmin
+
+![](images/clipboard-1307676110.png)
