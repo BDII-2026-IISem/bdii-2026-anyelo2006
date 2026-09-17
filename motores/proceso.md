@@ -881,3 +881,21 @@ CREATE TABLE purchase_details (
 ```
 
 ![](images/clipboard-2201388968.png)
+
+## creación de la tabla inventories en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE inventories (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    location_id NUMBER NOT NULL,
+    product_id NUMBER NOT NULL,
+    quantity NUMBER NOT NULL,
+    minimum_stock NUMBER NOT NULL,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-1002392650.png)
