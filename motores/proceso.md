@@ -292,3 +292,21 @@ CREATE TABLE products (
 ```
 
 ![](images/clipboard-1131604180.png)
+
+# creación de la tabla suppliers en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE suppliers (
+    id SERIAL PRIMARY KEY,
+    nit VARCHAR(30) NOT NULL UNIQUE,
+    company_name VARCHAR(150) NOT NULL,
+    contact_person VARCHAR(100),
+    phone VARCHAR(30),
+    email VARCHAR(100),
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+```
+
+![](images/clipboard-634459916.png)
