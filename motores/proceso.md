@@ -793,3 +793,9 @@ CREATE TABLE returns (
 ## creación de la tabla receivable_payments en el gestor sql server studio
 
 ![](images/clipboard-3869183817.png)
+
+## creación de la tabla returns en el gestor sql server studio
+
+![](images/clipboard-3694842347.png)
+
+![](images/clipboard-3497284404.png)
