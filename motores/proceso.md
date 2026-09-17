@@ -1043,3 +1043,7 @@ CREATE TABLE returns (
 ## creación de la tabla customers en el gestor oracle sql developer
 
 ![](images/clipboard-3744417182.png)
+
+## creación de la tabla sales en el gestor oracle sql developer
+
+![](images/clipboard-1768162013.png)
