@@ -937,3 +937,24 @@ CREATE TABLE sales (
 ```
 
 ![](images/clipboard-2451081735.png)
+
+## creación de la tabla sale_details  en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE sale_details (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    sale_id NUMBER NOT NULL,
+    product_id NUMBER NOT NULL,
+    quantity NUMBER NOT NULL,
+    unit_price NUMBER(12,2) NOT NULL,
+    total NUMBER(12,2) NOT NULL,
+    notes CLOB,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-777018311.png)
