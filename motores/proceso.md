@@ -245,3 +245,7 @@ CREATE TABLE returns (
 ## creación de la tabla customers en workbench
 
 ![](images/clipboard-109304435.png)
+
+## creación de la tabla sales en workbench
+
+![](images/clipboard-3756534524.png)
