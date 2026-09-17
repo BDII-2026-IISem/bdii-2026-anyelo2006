@@ -330,3 +330,24 @@ CREATE TABLE purchases (
 ```
 
 ![](images/clipboard-2236403077.png)
+
+# creación de la tabla purchase_details en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE purchase_details (
+    id SERIAL PRIMARY KEY,
+    purchase_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    unit_price DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    notes TEXT,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES purchases(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-2378527036.png)
