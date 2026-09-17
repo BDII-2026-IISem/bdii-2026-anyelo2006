@@ -253,3 +253,7 @@ CREATE TABLE returns (
 ## creación de la tabla sale_details en workbench
 
 ![](images/clipboard-686804646.png)
+
+## creación de la tabla accounts_receivable en workbench
+
+![](images/clipboard-1756397758.png)
