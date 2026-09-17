@@ -370,7 +370,7 @@ CREATE TABLE inventories (
 
 ![](images/clipboard-1220782752.png)
 
-# creación de la tabla inventories en la termina dbeaver postgres
+# creación de la tabla customers en la termina dbeaver postgres
 
 ``` sql
 CREATE TABLE customers (
