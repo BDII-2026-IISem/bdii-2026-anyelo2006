@@ -615,3 +615,21 @@ CREATE TABLE purchase_details (
 ```
 
 ![](images/clipboard-3068086407.png)
+
+## creacón de la tabla inventories en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE inventories (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    location_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    minimum_stock INT NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-1690554913.png)
