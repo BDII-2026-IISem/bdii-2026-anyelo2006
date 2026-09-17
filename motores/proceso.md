@@ -574,3 +574,23 @@ CREATE TABLE suppliers (
 ```
 
 ![](images/clipboard-1697334636.png)
+
+## creacón de la tabla purchases en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE purchases (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    supplier_id INT NOT NULL,
+    purchase_date DATETIME NOT NULL,
+    subtotal DECIMAL(12,2) NOT NULL,
+    taxes DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+);
+```
+
+![](images/clipboard-1788192705.png)
