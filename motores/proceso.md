@@ -633,3 +633,21 @@ CREATE TABLE inventories (
 ```
 
 ![](images/clipboard-1690554913.png)
+
+## creacón de la tabla customers en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE customers (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    document_type VARCHAR(20) NOT NULL,
+    document_number VARCHAR(30) NOT NULL UNIQUE,
+    full_name VARCHAR(150) NOT NULL,
+    phone VARCHAR(30),
+    email VARCHAR(100),
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+```
+
+![](images/clipboard-1987953155.png)
