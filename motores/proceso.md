@@ -447,3 +447,22 @@ CREATE TABLE accounts_receivable (
 ```
 
 ![](images/clipboard-3914414257.png)
+
+# creación de la tabla receivable_payments en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE receivable_payments (
+    id SERIAL PRIMARY KEY,
+    account_receivable_id INT NOT NULL,
+    payment_date TIMESTAMP NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    notes TEXT,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (account_receivable_id) REFERENCES accounts_receivable(id)
+);
+```
+
+![](images/clipboard-694075832.png)
