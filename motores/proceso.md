@@ -1020,4 +1020,6 @@ CREATE TABLE returns (
 
 ![](images/clipboard-553992051.png)
 
-## 
+## creación de la tabla products en el gestor oracle sql developer
+
+![](images/clipboard-534386761.png)
