@@ -692,3 +692,22 @@ CREATE TABLE sale_details (
 ```
 
 ![](images/clipboard-4242554095.png)
+
+## creacón de la tabla accounts_receivable en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE accounts_receivable (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    sale_id INT NOT NULL UNIQUE,
+    issue_date DATETIME NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    notes VARCHAR(MAX),
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-3642227568.png)
