@@ -1051,3 +1051,7 @@ CREATE TABLE returns (
 ## creación de la tabla sale_details en el gestor oracle sql developer
 
 ![](images/clipboard-4233387033.png)
+
+## creación de la accounts_receivable en el gestor oracle sql developer
+
+![](images/clipboard-4126146909.png)
