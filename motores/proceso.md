@@ -730,3 +730,22 @@ CREATE TABLE receivable_payments (
 ```
 
 ![](images/clipboard-158549472.png)
+
+## creacón de la tabla returns en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE returns (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    sale_id INT NOT NULL,
+    return_date DATETIME NOT NULL,
+    reason VARCHAR(MAX) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-2055355966.png)
