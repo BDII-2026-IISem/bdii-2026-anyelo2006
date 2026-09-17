@@ -501,3 +501,7 @@ CREATE TABLE returns (
 ## creación de la tabla purchases  en pgadmin
 
 ![](images/clipboard-2903285670.png)
+
+## creación de la tabla purchase_details en pgadmin
+
+![](images/clipboard-994996476.png)
