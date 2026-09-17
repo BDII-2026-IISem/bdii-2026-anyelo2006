@@ -785,3 +785,7 @@ CREATE TABLE returns (
 ## creación de la tabla  sale_details en el gestor sql server studio
 
 ![](images/clipboard-1419790603.png)
+
+## creación de la tabla  accounts_receivable en el gestor sql server studio
+
+![](images/clipboard-3702814613.png)
