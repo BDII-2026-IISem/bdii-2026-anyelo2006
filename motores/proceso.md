@@ -899,3 +899,21 @@ CREATE TABLE inventories (
 ```
 
 ![](images/clipboard-1002392650.png)
+
+## creación de la tabla customers en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE customers (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    document_type VARCHAR2(20) NOT NULL,
+    document_number VARCHAR2(30) NOT NULL UNIQUE,
+    full_name VARCHAR2(150) NOT NULL,
+    phone VARCHAR2(30),
+    email VARCHAR2(100),
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL
+);
+```
+
+![](images/clipboard-2956779518.png)
