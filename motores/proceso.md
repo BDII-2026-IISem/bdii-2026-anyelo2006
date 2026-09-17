@@ -556,3 +556,21 @@ CREATE TABLE products (
 ```
 
 ![](images/clipboard-1392114403.png)
+
+## creacón de la tabla suppliers en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE suppliers (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    nit VARCHAR(30) NOT NULL UNIQUE,
+    company_name VARCHAR(150) NOT NULL,
+    contact_person VARCHAR(100),
+    phone VARCHAR(30),
+    email VARCHAR(100),
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+```
+
+![](images/clipboard-1697334636.png)
