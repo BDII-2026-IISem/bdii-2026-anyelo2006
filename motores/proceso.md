@@ -1055,3 +1055,7 @@ CREATE TABLE returns (
 ## creación de la accounts_receivable en el gestor oracle sql developer
 
 ![](images/clipboard-4126146909.png)
+
+## creación de la receivable_payments en el gestor oracle sql developer
+
+![](images/clipboard-1233716740.png)
