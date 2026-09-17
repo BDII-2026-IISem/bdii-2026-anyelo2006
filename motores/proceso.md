@@ -749,3 +749,7 @@ CREATE TABLE returns (
 ```
 
 ![](images/clipboard-2055355966.png)
+
+## creación de la base de datos en el gestor sql server studio
+
+![](images/clipboard-2263516106.png)
