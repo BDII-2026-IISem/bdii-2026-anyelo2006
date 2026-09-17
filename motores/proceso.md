@@ -1047,3 +1047,7 @@ CREATE TABLE returns (
 ## creación de la tabla sales en el gestor oracle sql developer
 
 ![](images/clipboard-1768162013.png)
+
+## creación de la tabla sale_details en el gestor oracle sql developer
+
+![](images/clipboard-4233387033.png)
