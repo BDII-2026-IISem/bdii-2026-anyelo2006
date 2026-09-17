@@ -769,3 +769,7 @@ CREATE TABLE returns (
 ## creación de la tabla purchase_details en el gestor sql server studio
 
 ![](images/clipboard-1345475685.png)
+
+## creación de la tabla  inventories en el gestor sql server studio
+
+![](images/clipboard-3029615116.png)
