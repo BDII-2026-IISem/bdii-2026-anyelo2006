@@ -799,3 +799,26 @@ CREATE TABLE returns (
 ![](images/clipboard-3694842347.png)
 
 ![](images/clipboard-3497284404.png)
+
+# 
+
+# creación de la base de datos en oracle por terminal dbeaver
+
+![](images/clipboard-2635661561.png)
+
+## creación de la tabla products en la terminal de dbeaver oracle
+
+``` {.or .sq}
+CREATE TABLE products (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    sku VARCHAR2(50) NOT NULL UNIQUE,
+    name VARCHAR2(150) NOT NULL,
+    description VARCHAR2(225),
+    price NUMBER(12,2) NOT NULL,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL
+);
+```
+
+![](images/clipboard-3450094009.png)
