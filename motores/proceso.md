@@ -257,3 +257,7 @@ CREATE TABLE returns (
 ## creación de la tabla accounts_receivable en workbench
 
 ![](images/clipboard-1756397758.png)
+
+## creación de la tabla receivable_payments en workbench
+
+![](images/clipboard-3982806396.png)
