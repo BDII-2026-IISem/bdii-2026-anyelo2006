@@ -977,3 +977,22 @@ CREATE TABLE accounts_receivable (
 ```
 
 ![](images/clipboard-2572332539.png)
+
+## creación de la receivable_payments  en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE receivable_payments (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    account_receivable_id NUMBER NOT NULL,
+    payment_date DATE NOT NULL,
+    amount NUMBER(12,2) NOT NULL,
+    state VARCHAR2(30) NOT NULL,
+    notes CLOB,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (account_receivable_id) REFERENCES accounts_receivable(id)
+);
+```
+
+![](images/clipboard-250316208.png)
