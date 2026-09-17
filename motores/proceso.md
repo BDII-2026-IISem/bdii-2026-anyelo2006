@@ -275,3 +275,20 @@ create database SumintroPro;
 ```
 
 ![](images/clipboard-4049943986.png)
+
+# creación de la tabla products en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    sku VARCHAR(50) NOT NULL UNIQUE,
+    name VARCHAR(150) NOT NULL,
+    description VARCHAR(225),
+    price DECIMAL(12,2) NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')) DEFAULT 'active',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+![](images/clipboard-1131604180.png)
