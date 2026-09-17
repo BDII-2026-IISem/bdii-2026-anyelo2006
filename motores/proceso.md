@@ -711,3 +711,22 @@ CREATE TABLE accounts_receivable (
 ```
 
 ![](images/clipboard-3642227568.png)
+
+## creacón de la tabla receivable_payments en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE receivable_payments (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    account_receivable_id INT NOT NULL,
+    payment_date DATETIME NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    notes VARCHAR(MAX),
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (account_receivable_id) REFERENCES accounts_receivable(id)
+);
+```
+
+![](images/clipboard-158549472.png)
