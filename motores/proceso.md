@@ -517,3 +517,7 @@ CREATE TABLE returns (
 ## creación de la tabla  sales en pgadmin
 
 ![](images/clipboard-848207175.png)
+
+## creación de la tabla sale_details en pgadmin
+
+![](images/clipboard-393642393.png)
