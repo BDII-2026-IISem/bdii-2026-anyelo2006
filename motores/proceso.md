@@ -369,3 +369,21 @@ CREATE TABLE inventories (
 ```
 
 ![](images/clipboard-1220782752.png)
+
+# creación de la tabla inventories en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    document_type VARCHAR(20) NOT NULL,
+    document_number VARCHAR(30) NOT NULL UNIQUE,
+    full_name VARCHAR(150) NOT NULL,
+    phone VARCHAR(30),
+    email VARCHAR(100),
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+```
+
+![](images/clipboard-2220114413.png)
