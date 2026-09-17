@@ -351,3 +351,21 @@ CREATE TABLE purchase_details (
 ```
 
 ![](images/clipboard-2378527036.png)
+
+# creación de la tabla inventories en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE inventories (
+    id SERIAL PRIMARY KEY,
+    location_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    minimum_stock INT NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-1220782752.png)
