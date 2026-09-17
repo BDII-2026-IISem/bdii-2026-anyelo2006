@@ -494,6 +494,10 @@ CREATE TABLE returns (
 
 ![](images/clipboard-737382704.png)
 
-## creación de suppliers  en pgadmin
+## creación de la tabla suppliers  en pgadmin
 
 ![](images/clipboard-1240823183.png)
+
+## creación de la tabla purchases  en pgadmin
+
+![](images/clipboard-2903285670.png)
