@@ -996,3 +996,22 @@ CREATE TABLE receivable_payments (
 ```
 
 ![](images/clipboard-250316208.png)
+
+## creación de la returns  en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE returns (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    sale_id NUMBER NOT NULL,
+    return_date DATE NOT NULL,
+    reason CLOB NOT NULL,
+    total NUMBER(12,2) NOT NULL,
+    state VARCHAR2(30) NOT NULL,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-3416012052.png)
