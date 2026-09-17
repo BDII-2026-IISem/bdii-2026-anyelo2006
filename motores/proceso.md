@@ -226,15 +226,15 @@ CREATE TABLE returns (
 
 ![](images/clipboard-1982452136.png)
 
-## creación de la tabla suppliers  en workbench
+## creación de la tabla suppliers en workbench
 
 ![](images/clipboard-284856169.png)
 
-## creación de la tabla purchases  en workbench
+## creación de la tabla purchases en workbench
 
 ![](images/clipboard-3407294112.png)
 
-## creación de la tabla parchease_details   en workbench
+## creación de la tabla parchease_details en workbench
 
 ![](images/clipboard-1755828797.png)
 
@@ -494,11 +494,11 @@ CREATE TABLE returns (
 
 ![](images/clipboard-737382704.png)
 
-## creación de la tabla suppliers  en pgadmin
+## creación de la tabla suppliers en pgadmin
 
 ![](images/clipboard-1240823183.png)
 
-## creación de la tabla purchases  en pgadmin
+## creación de la tabla purchases en pgadmin
 
 ![](images/clipboard-2903285670.png)
 
@@ -506,7 +506,7 @@ CREATE TABLE returns (
 
 ![](images/clipboard-994996476.png)
 
-## creación de la tabla  inventories en pgadmin
+## creación de la tabla inventories en pgadmin
 
 ![](images/clipboard-1307676110.png)
 
@@ -514,7 +514,7 @@ CREATE TABLE returns (
 
 ![](images/clipboard-3450785037.png)
 
-## creación de la tabla  sales en pgadmin
+## creación de la tabla sales en pgadmin
 
 ![](images/clipboard-848207175.png)
 
@@ -526,7 +526,7 @@ CREATE TABLE returns (
 
 ![](images/clipboard-2072313098.png)
 
-## creación de la  receivable_payments  en pgadmin
+## creación de la receivable_payments en pgadmin
 
 ![](images/clipboard-452296250.png)
 
@@ -536,11 +536,11 @@ CREATE TABLE returns (
 
 ![](images/clipboard-3819260972.png)
 
-# creación de la base de datos en sql server en la terminal dbeaver 
+# creación de la base de datos en sql server en la terminal dbeaver
 
 ![](images/clipboard-3618761232.png)
 
-## creacón de la tabla products en la terminal dbeaver sql server 
+## creacón de la tabla products en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE products (
@@ -557,7 +557,7 @@ CREATE TABLE products (
 
 ![](images/clipboard-1392114403.png)
 
-## creacón de la tabla suppliers en la terminal dbeaver sql server 
+## creacón de la tabla suppliers en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE suppliers (
@@ -575,7 +575,7 @@ CREATE TABLE suppliers (
 
 ![](images/clipboard-1697334636.png)
 
-## creacón de la tabla purchases en la terminal dbeaver sql server 
+## creacón de la tabla purchases en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE purchases (
@@ -595,7 +595,7 @@ CREATE TABLE purchases (
 
 ![](images/clipboard-1788192705.png)
 
-## creacón de la tabla purchase_details en la terminal dbeaver sql server 
+## creacón de la tabla purchase_details en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE purchase_details (
@@ -616,7 +616,7 @@ CREATE TABLE purchase_details (
 
 ![](images/clipboard-3068086407.png)
 
-## creacón de la tabla inventories en la terminal dbeaver sql server 
+## creacón de la tabla inventories en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE inventories (
@@ -634,7 +634,7 @@ CREATE TABLE inventories (
 
 ![](images/clipboard-1690554913.png)
 
-## creacón de la tabla customers en la terminal dbeaver sql server 
+## creacón de la tabla customers en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE customers (
@@ -652,7 +652,7 @@ CREATE TABLE customers (
 
 ![](images/clipboard-1987953155.png)
 
-## creacón de la tabla sales en la terminal dbeaver sql server 
+## creacón de la tabla sales en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE sales (
@@ -672,7 +672,7 @@ CREATE TABLE sales (
 
 ![](images/clipboard-1793549803.png)
 
-## creacón de la tabla sale_details en la terminal dbeaver sql server 
+## creacón de la tabla sale_details en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE sale_details (
@@ -693,7 +693,7 @@ CREATE TABLE sale_details (
 
 ![](images/clipboard-4242554095.png)
 
-## creacón de la tabla accounts_receivable en la terminal dbeaver sql server 
+## creacón de la tabla accounts_receivable en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE accounts_receivable (
@@ -712,7 +712,7 @@ CREATE TABLE accounts_receivable (
 
 ![](images/clipboard-3642227568.png)
 
-## creacón de la tabla receivable_payments en la terminal dbeaver sql server 
+## creacón de la tabla receivable_payments en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE receivable_payments (
@@ -731,7 +731,7 @@ CREATE TABLE receivable_payments (
 
 ![](images/clipboard-158549472.png)
 
-## creacón de la tabla returns en la terminal dbeaver sql server 
+## creacón de la tabla returns en la terminal dbeaver sql server
 
 ``` sql
 CREATE TABLE returns (
@@ -770,23 +770,23 @@ CREATE TABLE returns (
 
 ![](images/clipboard-1345475685.png)
 
-## creación de la tabla  inventories en el gestor sql server studio
+## creación de la tabla inventories en el gestor sql server studio
 
 ![](images/clipboard-3029615116.png)
 
-## creación de la tabla customers  en el gestor sql server studio
+## creación de la tabla customers en el gestor sql server studio
 
 ![](images/clipboard-2326081434.png)
 
-## creación de la tabla  sales en el gestor sql server studio
+## creación de la tabla sales en el gestor sql server studio
 
 ![](images/clipboard-1772113583.png)
 
-## creación de la tabla  sale_details en el gestor sql server studio
+## creación de la tabla sale_details en el gestor sql server studio
 
 ![](images/clipboard-1419790603.png)
 
-## creación de la tabla  accounts_receivable en el gestor sql server studio
+## creación de la tabla accounts_receivable en el gestor sql server studio
 
 ![](images/clipboard-3702814613.png)
 
@@ -938,7 +938,7 @@ CREATE TABLE sales (
 
 ![](images/clipboard-2451081735.png)
 
-## creación de la tabla sale_details  en la terminal de dbeaver oracle
+## creación de la tabla sale_details en la terminal de dbeaver oracle
 
 ``` sql
 CREATE TABLE sale_details (
@@ -959,7 +959,7 @@ CREATE TABLE sale_details (
 
 ![](images/clipboard-777018311.png)
 
-## creación de la accounts_receivable  en la terminal de dbeaver oracle
+## creación de la accounts_receivable en la terminal de dbeaver oracle
 
 ``` sql
 CREATE TABLE accounts_receivable (
@@ -978,7 +978,7 @@ CREATE TABLE accounts_receivable (
 
 ![](images/clipboard-2572332539.png)
 
-## creación de la receivable_payments  en la terminal de dbeaver oracle
+## creación de la receivable_payments en la terminal de dbeaver oracle
 
 ``` sql
 CREATE TABLE receivable_payments (
@@ -997,7 +997,7 @@ CREATE TABLE receivable_payments (
 
 ![](images/clipboard-250316208.png)
 
-## creación de la returns  en la terminal de dbeaver oracle
+## creación de la returns en la terminal de dbeaver oracle
 
 ``` sql
 CREATE TABLE returns (
