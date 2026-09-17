@@ -485,3 +485,7 @@ CREATE TABLE returns (
 ```
 
 ![](images/clipboard-2010873376.png)
+
+# creación de mi base de datos en pgadmin
+
+![](images/clipboard-3409456944.png)
