@@ -521,3 +521,7 @@ CREATE TABLE returns (
 ## creación de la tabla sale_details en pgadmin
 
 ![](images/clipboard-393642393.png)
+
+## creación de la accounts_receivable en pgadmin
+
+![](images/clipboard-2072313098.png)
