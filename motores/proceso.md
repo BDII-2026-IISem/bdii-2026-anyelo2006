@@ -777,3 +777,7 @@ CREATE TABLE returns (
 ## creación de la tabla customers  en el gestor sql server studio
 
 ![](images/clipboard-2326081434.png)
+
+## creación de la tabla  sales en el gestor sql server studio
+
+![](images/clipboard-1772113583.png)
