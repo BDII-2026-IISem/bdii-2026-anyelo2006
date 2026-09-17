@@ -265,3 +265,13 @@ CREATE TABLE returns (
 ## creación de la tabla returns en workbench
 
 ![](images/clipboard-3171669395.png)
+
+# creación de mi base de datos en postgres
+
+# creación de mi base dato en la termina dbeaver
+
+``` sql
+create database SumintroPro;
+```
+
+![](images/clipboard-4049943986.png)
