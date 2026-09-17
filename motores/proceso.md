@@ -387,3 +387,23 @@ CREATE TABLE customers (
 ```
 
 ![](images/clipboard-2220114413.png)
+
+# creación de la tabla sales en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    customer_id INT NOT NULL,
+    sale_date TIMESTAMP NOT NULL,
+    subtotal DECIMAL(12,2) NOT NULL,
+    taxes DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+```
+
+![](images/clipboard-1013796511.png)
