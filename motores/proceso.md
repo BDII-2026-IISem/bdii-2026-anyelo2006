@@ -407,3 +407,24 @@ CREATE TABLE sales (
 ```
 
 ![](images/clipboard-1013796511.png)
+
+# creación de la tabla sale_details en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE sale_details (
+    id SERIAL PRIMARY KEY,
+    sale_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    unit_price DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    notes TEXT,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-131840447.png)
