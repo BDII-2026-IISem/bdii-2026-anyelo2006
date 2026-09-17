@@ -1035,3 +1035,7 @@ CREATE TABLE returns (
 ## creación de la tabla purchase_details en el gestor oracle sql developer
 
 ![](images/clipboard-3342020161.png)
+
+## creación de la tabla inventories en el gestor oracle sql developer
+
+![](images/clipboard-926613916.png)
