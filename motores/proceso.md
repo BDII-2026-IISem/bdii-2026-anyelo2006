@@ -781,3 +781,7 @@ CREATE TABLE returns (
 ## creación de la tabla  sales en el gestor sql server studio
 
 ![](images/clipboard-1772113583.png)
+
+## creación de la tabla  sale_details en el gestor sql server studio
+
+![](images/clipboard-1419790603.png)
