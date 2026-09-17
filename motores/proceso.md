@@ -241,3 +241,7 @@ CREATE TABLE returns (
 ## creación de la tabla inventories en workbench
 
 ![](images/clipboard-556122535.png)
+
+## creación de la tabla customers en workbench
+
+![](images/clipboard-109304435.png)
