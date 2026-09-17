@@ -860,3 +860,24 @@ CREATE TABLE purchases (
 ```
 
 ![](images/clipboard-2192900051.png)
+
+## creación de la tabla purchase_details en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE purchase_details (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    purchase_id NUMBER NOT NULL,
+    product_id NUMBER NOT NULL,
+    quantity NUMBER NOT NULL,
+    unit_price NUMBER(12,2) NOT NULL,
+    total NUMBER(12,2) NOT NULL,
+    notes CLOB,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES purchases(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+```
+
+![](images/clipboard-2201388968.png)
