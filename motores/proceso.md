@@ -651,3 +651,23 @@ CREATE TABLE customers (
 ```
 
 ![](images/clipboard-1987953155.png)
+
+## creacón de la tabla sales en la terminal dbeaver sql server 
+
+``` sql
+CREATE TABLE sales (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    customer_id INT NOT NULL,
+    sale_date DATETIME NOT NULL,
+    subtotal DECIMAL(12,2) NOT NULL,
+    taxes DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+```
+
+![](images/clipboard-1793549803.png)
