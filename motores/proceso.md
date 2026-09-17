@@ -958,3 +958,22 @@ CREATE TABLE sale_details (
 ```
 
 ![](images/clipboard-777018311.png)
+
+## creación de la accounts_receivable  en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE accounts_receivable (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    sale_id NUMBER NOT NULL UNIQUE,
+    issue_date DATE NOT NULL,
+    amount NUMBER(12,2) NOT NULL,
+    state VARCHAR2(30) NOT NULL,
+    notes CLOB,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-2572332539.png)
