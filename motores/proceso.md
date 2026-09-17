@@ -1015,3 +1015,9 @@ CREATE TABLE returns (
 ```
 
 ![](images/clipboard-3416012052.png)
+
+## creación de la base de dato por el gestor oracle sql developer
+
+![](images/clipboard-553992051.png)
+
+## 
