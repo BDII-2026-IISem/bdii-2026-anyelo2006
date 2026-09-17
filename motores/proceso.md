@@ -509,3 +509,7 @@ CREATE TABLE returns (
 ## creación de la tabla  inventories en pgadmin
 
 ![](images/clipboard-1307676110.png)
+
+## creación de la tabla customers en pgadmin
+
+![](images/clipboard-3450785037.png)
