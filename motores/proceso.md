@@ -840,3 +840,23 @@ CREATE TABLE suppliers (
 ```
 
 ![](images/clipboard-2955958280.png)
+
+## creación de la tabla purchases en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE purchases (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    supplier_id NUMBER NOT NULL,
+    purchase_date DATE NOT NULL,
+    subtotal NUMBER(12,2) NOT NULL,
+    taxes NUMBER(12,2) NOT NULL,
+    total NUMBER(12,2) NOT NULL,
+    state VARCHAR2(30) NOT NULL,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+);
+```
+
+![](images/clipboard-2192900051.png)
