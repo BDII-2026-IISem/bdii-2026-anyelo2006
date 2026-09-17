@@ -1027,3 +1027,7 @@ CREATE TABLE returns (
 ## creación de la tabla suppliers en el gestor oracle sql developer
 
 ![](images/clipboard-1233079586.png)
+
+## creación de la tabla purchases en el gestor oracle sql developer
+
+![](images/clipboard-2470559873.png)
