@@ -822,3 +822,21 @@ CREATE TABLE products (
 ```
 
 ![](images/clipboard-3450094009.png)
+
+## creación de la tabla suppliers en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE suppliers (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nit VARCHAR2(30) NOT NULL UNIQUE,
+    company_name VARCHAR2(150) NOT NULL,
+    contact_person VARCHAR2(100),
+    phone VARCHAR2(30),
+    email VARCHAR2(100),
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL
+);
+```
+
+![](images/clipboard-2955958280.png)
