@@ -535,3 +535,7 @@ CREATE TABLE returns (
 ![](images/clipboard-2484187163.png)
 
 ![](images/clipboard-3819260972.png)
+
+# creación de la base de datos en sql server en la terminal dbeaver 
+
+![](images/clipboard-3618761232.png)
