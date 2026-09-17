@@ -917,3 +917,23 @@ CREATE TABLE customers (
 ```
 
 ![](images/clipboard-2956779518.png)
+
+## creación de la tabla sales en la terminal de dbeaver oracle
+
+``` sql
+CREATE TABLE sales (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id NUMBER NOT NULL,
+    sale_date DATE NOT NULL,
+    subtotal NUMBER(12,2) NOT NULL,
+    taxes NUMBER(12,2) NOT NULL,
+    total NUMBER(12,2) NOT NULL,
+    state VARCHAR2(30) NOT NULL,
+    status VARCHAR2(10) CHECK (status IN ('active', 'inactive')),
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+```
+
+![](images/clipboard-2451081735.png)
