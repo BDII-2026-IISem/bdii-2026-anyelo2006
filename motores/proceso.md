@@ -1060,6 +1060,6 @@ CREATE TABLE returns (
 
 ![](images/clipboard-1233716740.png)
 
-## creación de la returns en el gestor oracle sql developer
+## creación de la tabla returns en el gestor oracle sql developer
 
 ![](images/clipboard-2357709066.png)
