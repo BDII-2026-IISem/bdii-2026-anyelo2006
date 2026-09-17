@@ -1023,3 +1023,7 @@ CREATE TABLE returns (
 ## creación de la tabla products en el gestor oracle sql developer
 
 ![](images/clipboard-534386761.png)
+
+## creación de la tabla suppliers en el gestor oracle sql developer
+
+![](images/clipboard-1233079586.png)
