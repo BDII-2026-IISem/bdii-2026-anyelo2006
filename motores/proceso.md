@@ -237,3 +237,7 @@ CREATE TABLE returns (
 ## creación de la tabla parchease_details   en workbench
 
 ![](images/clipboard-1755828797.png)
+
+## creación de la tabla inventories en workbench
+
+![](images/clipboard-556122535.png)
