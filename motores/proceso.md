@@ -757,3 +757,7 @@ CREATE TABLE returns (
 ## creación de la tabla products en el gestor sql server studio
 
 ![](images/clipboard-1914273460.png)
+
+## creación de la tabla suppliers en el gestor sql server studio
+
+![](images/clipboard-3684891000.png)
