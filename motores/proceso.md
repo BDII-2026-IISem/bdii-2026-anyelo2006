@@ -249,3 +249,7 @@ CREATE TABLE returns (
 ## creación de la tabla sales en workbench
 
 ![](images/clipboard-3756534524.png)
+
+## creación de la tabla sale_details en workbench
+
+![](images/clipboard-686804646.png)
