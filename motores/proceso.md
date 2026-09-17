@@ -428,3 +428,22 @@ CREATE TABLE sale_details (
 ```
 
 ![](images/clipboard-131840447.png)
+
+# creación de la tabla accounts_receivable en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE accounts_receivable (
+    id SERIAL PRIMARY KEY,
+    sale_id INT NOT NULL UNIQUE,
+    issue_date TIMESTAMP NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    notes TEXT,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-3914414257.png)
