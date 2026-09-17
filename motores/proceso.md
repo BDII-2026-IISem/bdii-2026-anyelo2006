@@ -529,3 +529,9 @@ CREATE TABLE returns (
 ## creación de la  receivable_payments  en pgadmin
 
 ![](images/clipboard-452296250.png)
+
+## creación de la returns en pgadmin
+
+![](images/clipboard-2484187163.png)
+
+![](images/clipboard-3819260972.png)
