@@ -493,3 +493,7 @@ CREATE TABLE returns (
 ## creación de latabla products en pgadmin
 
 ![](images/clipboard-737382704.png)
+
+## creación de suppliers  en pgadmin
+
+![](images/clipboard-1240823183.png)
