@@ -489,3 +489,7 @@ CREATE TABLE returns (
 # creación de mi base de datos en pgadmin
 
 ![](images/clipboard-3409456944.png)
+
+## creación de latabla products en pgadmin
+
+![](images/clipboard-737382704.png)
