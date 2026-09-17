@@ -310,3 +310,23 @@ CREATE TABLE suppliers (
 ```
 
 ![](images/clipboard-634459916.png)
+
+# creación de la tabla purchases en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE purchases (
+    id SERIAL PRIMARY KEY,
+    supplier_id INT NOT NULL,
+    purchase_date TIMESTAMP NOT NULL,
+    subtotal DECIMAL(12,2) NOT NULL,
+    taxes DECIMAL(12,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+);
+```
+
+![](images/clipboard-2236403077.png)
