@@ -466,3 +466,22 @@ CREATE TABLE receivable_payments (
 ```
 
 ![](images/clipboard-694075832.png)
+
+# creación de la tabla returns en la termina dbeaver postgres
+
+``` sql
+CREATE TABLE returns (
+    id SERIAL PRIMARY KEY,
+    sale_id INT NOT NULL,
+    return_date TIMESTAMP NOT NULL,
+    reason TEXT NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    status VARCHAR(10) CHECK (status IN ('active', 'inactive')),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (sale_id) REFERENCES sales(id)
+);
+```
+
+![](images/clipboard-2010873376.png)
