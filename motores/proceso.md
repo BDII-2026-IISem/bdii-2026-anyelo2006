@@ -1066,6 +1066,6 @@ CREATE TABLE returns (
 
 ![](images/clipboard-4268159378.jpeg)
 
-# conclusión 
+# conclusión
 
 La implementación y migración de la base de datos *SuministroPro* a través de distintos motores relacionales (RDBMS) evidencia que, aunque la lógica del modelo entidad-relación se mantiene constante, la administración efectiva de los datos exige adaptarse a las especificaciones de cada gestor. Desde la gestión de puertos y contenedores hasta el control de permisos y tipos de datos nativos, el proyecto demuestra que un entorno de almacenamiento óptimo requiere equilibrar el rendimiento, la seguridad y la interoperabilidad con las herramientas de cliente, garantizando la disponibilidad e integridad de la información en cualquier plataforma.
