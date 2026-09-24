@@ -105,3 +105,15 @@ SELECT id, sale_date, total, status FROM sales ORDER BY sale_date DESC;
 ```
 
 ![](images/clipboard-2696830787.png)
+
+## 2.3 Consultas a múltiples tablas mediante WHERE
+
+``` sql
+SELECT *
+FROM sales s, customers c 
+WHERE c.id = s.customer_id;
+```
+
+![![](images/clipboard-3637097975.png)](images/clipboard-3237375928.png)
+
+![](images/clipboard-691916665.png)
