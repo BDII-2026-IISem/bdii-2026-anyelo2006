@@ -55,3 +55,11 @@ SELECT * FROM SuministroPro.sales;
 ```
 
 ![](images/clipboard-415449818.png)
+
+## 1.8 Registro de la tabla sale_details
+
+``` sql
+SELECT * FROM SuministroPro.sale_details;
+```
+
+![](images/clipboard-587043589.png)
