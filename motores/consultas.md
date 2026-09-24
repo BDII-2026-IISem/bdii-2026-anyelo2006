@@ -117,3 +117,15 @@ WHERE c.id = s.customer_id;
 ![![](images/clipboard-3637097975.png)](images/clipboard-3237375928.png)
 
 ![](images/clipboard-691916665.png)
+
+## 2.4 Consultas a múltiples tablas mediante JOIN
+
+``` sql
+SELECT c.full_name, c.email, s.* 
+FROM customers AS c 
+JOIN sales AS s ON (c.id = s.customer_id);
+```
+
+![](images/clipboard-3465154707.png)
+
+![](images/clipboard-2245255808.png)
