@@ -79,3 +79,11 @@ SELECT * FROM SuministroPro.receivable_payments;
 ```
 
 ![](images/clipboard-528738911.png)
+
+##  1.11 Registro de la tabla returns
+
+``` sql
+SELECT * FROM SuministroPro.returns;
+```
+
+![](images/clipboard-2385880107.png)
