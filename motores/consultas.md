@@ -141,3 +141,43 @@ WHERE c.id = s.customer_id AND s.status = 'active';
 ![![](images/clipboard-1992643145.png)](images/clipboard-781554155.png)
 
 ![](images/clipboard-3285347994.png)
+
+``` sql
+SELECT c.full_name, c.email, s.* 
+FROM customers AS c 
+JOIN sales AS s ON (c.id = s.customer_id) 
+WHERE s.status = 'inactive';
+```
+
+![![](images/clipboard-2747926933.png)](images/clipboard-2024714984.png)
+
+# 2.6 Consultas con filtros condicional LIKE
+
+``` sql
+SELECT * 
+FROM customers AS c 
+WHERE c.email LIKE 'm%';
+```
+
+![](images/clipboard-2547520077.png)
+
+## **Mostrar todos los correos de los clientes que contengan el dominio gmail**
+
+``` sql
+SELECT * 
+FROM customers AS c 
+WHERE c.email LIKE CONCAT('%', 'gmail', '%');
+```
+
+## ![](images/clipboard-1863704578.png)
+
+## Combinación del punto 1.5 y la implementación del LIKE
+
+``` sql
+SELECT c.full_name, c.email, s.* 
+FROM customers AS c 
+JOIN sales AS s ON (c.id = s.customer_id) 
+WHERE s.status = 'inactive' AND c.email LIKE 'm%';
+```
+
+![](images/clipboard-897229524.png)
