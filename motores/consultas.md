@@ -63,3 +63,11 @@ SELECT * FROM SuministroPro.sale_details;
 ```
 
 ![](images/clipboard-587043589.png)
+
+## 1.9 Registro de la tabla accounts_receivable
+
+``` sql
+SELECT * FROM SuministroPro.accounts_receivable;
+```
+
+![](images/clipboard-2546185796.png)
