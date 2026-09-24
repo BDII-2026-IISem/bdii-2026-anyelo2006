@@ -87,3 +87,13 @@ SELECT * FROM SuministroPro.returns;
 ```
 
 ![](images/clipboard-2385880107.png)
+
+# 2. Consultas avanzadas en MySQL:
+
+## 2.1 Mostrar algunos de los registros de la tabla customers
+
+``` sql
+SELECT full_name, document_type, document_number, status FROM customers;
+```
+
+![](images/clipboard-1776810327.png)
