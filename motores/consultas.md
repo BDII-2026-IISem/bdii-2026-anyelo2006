@@ -23,3 +23,11 @@ SELECT * FROM SuministroPro.purchases;
 ```
 
 ![](images/clipboard-2551854913.png)
+
+## 1.4 registro de la tabla purchase_details
+
+``` sql
+SELECT * FROM SuministroPro.purchase_details;
+```
+
+![](images/clipboard-556282369.png)
