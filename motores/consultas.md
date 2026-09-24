@@ -129,3 +129,15 @@ JOIN sales AS s ON (c.id = s.customer_id);
 ![](images/clipboard-3465154707.png)
 
 ![](images/clipboard-2245255808.png)
+
+## 2.5 Condiciones en las Consultas o filtros en las Consultas
+
+``` sql
+SELECT *
+FROM sales s, customers c 
+WHERE c.id = s.customer_id AND s.status = 'active';
+```
+
+![![](images/clipboard-1992643145.png)](images/clipboard-781554155.png)
+
+![](images/clipboard-3285347994.png)
