@@ -97,3 +97,11 @@ SELECT full_name, document_type, document_number, status FROM customers;
 ```
 
 ![](images/clipboard-1776810327.png)
+
+## 2.2 Mostrar de forma ordenada (DESC) las ventas desde su comienzo
+
+``` sql
+SELECT id, sale_date, total, status FROM sales ORDER BY sale_date DESC;
+```
+
+![](images/clipboard-2696830787.png)
