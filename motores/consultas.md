@@ -164,20 +164,44 @@ WHERE c.email LIKE 'm%';
 ## **Mostrar todos los correos de los clientes que contengan el dominio gmail**
 
 ``` sql
-SELECT * 
-FROM customers AS c 
-WHERE c.email LIKE CONCAT('%', 'gmail', '%');
+SELECT *
+FROM customers AS c
+WHERE c.email LIKE CONCAT('%', 'ejemplo.com', '%');
 ```
 
-## ![](images/clipboard-1863704578.png)
+## ![](images/clipboard-3712172.png)
 
 ## Combinación del punto 1.5 y la implementación del LIKE
 
 ``` sql
-SELECT c.full_name, c.email, s.* 
-FROM customers AS c 
-JOIN sales AS s ON (c.id = s.customer_id) 
-WHERE s.status = 'inactive' AND c.email LIKE 'm%';
+SELECT 
+    c.full_name, 
+    c.email, 
+    s.*
+FROM customers AS c
+JOIN sales AS s 
+    ON c.id = s.customer_id
+WHERE s.status = 'inactive'
+  AND c.email LIKE '%@ejemplo.com';
 ```
 
-![](images/clipboard-897229524.png)
+![](images/clipboard-3283914937.png)
+
+## 2.7 Consultas con filtros condicionales BETWEEN
+
+``` sql
+SELECT 
+    c.full_name, c.email, s.sale_date, s.status, ar.issue_date, p.sku
+FROM customers c
+JOIN sales s 
+    ON c.id = s.customer_id
+JOIN accounts_receivable ar 
+    ON s.id = ar.sale_id
+JOIN sale_details sd 
+    ON s.id = sd.sale_id
+JOIN products p ON p.id = sd.product_id
+WHERE s.sale_date BETWEEN '2026-08-15 00:00:00' AND '2026-09-17 23:59:59'
+ORDER BY s.sale_date ASC;
+```
+
+![![](images/clipboard-5278111.png)](images/clipboard-3672346416.png)
