@@ -32,7 +32,7 @@ SELECT * FROM SuministroPro.purchase_details;
 
 ![](images/clipboard-556282369.png)
 
-##  1.5 Registro de la tabla inventories
+## 1.5 Registro de la tabla inventories
 
 ``` sql
 SELECT * FROM SuministroPro.inventories;
@@ -80,7 +80,7 @@ SELECT * FROM SuministroPro.receivable_payments;
 
 ![](images/clipboard-528738911.png)
 
-##  1.11 Registro de la tabla returns
+## 1.11 Registro de la tabla returns
 
 ``` sql
 SELECT * FROM SuministroPro.returns;
@@ -92,13 +92,23 @@ SELECT * FROM SuministroPro.returns;
 
 ## 2.1 Mostrar algunos de los registros de la tabla customers
 
+Para este punto quise mostrar los datos básicos de los clientes, como su nombre completo, el tipo y número de documento, y si están activos o no en el sistema. Opté por hacer la consulta especificando exactamente esos campos en lugar de traer toda la tabla entera, porque así es más directo, se ve solo la información relevante que se necesita revisar y no cargamos la base de datos de manera innecesaria.
+
 ``` sql
 SELECT full_name, document_type, document_number, status FROM customers;
 ```
 
 ![](images/clipboard-1776810327.png)
 
+## Stored Procedure
+
+![](images/clipboard-2809681513.png)
+
+![](images/clipboard-3825976838.png)
+
 ## 2.2 Mostrar de forma ordenada (DESC) las ventas desde su comienzo
+
+En esta consulta quise revisar el historial de ventas para ver primero las más recientes y de ahí ir bajando hacia las más antiguas. Para eso seleccioné el id de la venta, la fecha, el total y el estado, y opté por usar ORDER BY con la fecha de forma descendente (DESC) para que la información quede organizada cronológicamente comenzando por las últimas transacciones realizadas.
 
 ``` sql
 SELECT id, sale_date, total, status FROM sales ORDER BY sale_date DESC;
@@ -106,7 +116,15 @@ SELECT id, sale_date, total, status FROM sales ORDER BY sale_date DESC;
 
 ![](images/clipboard-2696830787.png)
 
+## Stored Procedure
+
+![](images/clipboard-344682806.png)
+
+![](images/clipboard-1277882468.png)
+
 ## 2.3 Consultas a múltiples tablas mediante WHERE
+
+En este punto quise relacionar las ventas con los clientes que realizaron cada compra. Para lograr esto, consulté las tablas sales y customers al mismo tiempo, utilizando alias (s y c) para simplificar el código y filtrando con la cláusula WHERE para que solo se crucen los registros donde el ID del cliente coincida en ambas tablas (c.id = s.customer_id).
 
 ``` sql
 SELECT *
@@ -118,7 +136,15 @@ WHERE c.id = s.customer_id;
 
 ![](images/clipboard-691916665.png)
 
+## Stored Procedure
+
+![](images/clipboard-3945838195.png)
+
+![](images/clipboard-3021423229.png)
+
 ## 2.4 Consultas a múltiples tablas mediante JOIN
+
+Para este punto utilicé la cláusula JOIN para relacionar la tabla de clientes con la tabla de ventas de forma explícita y estándar en SQL. Seleccioné el nombre completo y el correo del cliente junto con los datos de sus ventas asociadas, uniendo ambas tablas a través de la coincidencia entre el ID del cliente y la clave foránea en ventas.
 
 ``` sql
 SELECT c.full_name, c.email, s.* 
@@ -130,7 +156,17 @@ JOIN sales AS s ON (c.id = s.customer_id);
 
 ![](images/clipboard-2245255808.png)
 
+## Stored Procedure
+
+![](images/clipboard-3046561871.png)
+
+![](images/clipboard-1629027885.png)
+
+![](images/clipboard-2165228402.png)
+
 ## 2.5 Condiciones en las Consultas o filtros en las Consultas
+
+Esta consulta responde a la necesidad del negocio de monitorear únicamente las operaciones vigentes en el sistema. Se aplicó el filtro por estado activo para aislar las transacciones efectivas y descartar aquellas que fueron canceladas o están inactivas, garantizando que los reportes reflejen el flujo real de ventas sin distorsionar los totales.
 
 ``` sql
 SELECT *
@@ -142,6 +178,22 @@ WHERE c.id = s.customer_id AND s.status = 'active';
 
 ![](images/clipboard-3285347994.png)
 
+## Stored Procedure
+
+![](images/clipboard-592714543.png)
+
+![](images/clipboard-2118971499.png)
+
+![](images/clipboard-2994454127.png)
+
+![](images/clipboard-3536888877.png)
+
+![](images/clipboard-3147407247.png)
+
+## forma 2
+
+El propósito de esta consulta es cruzar la información de los clientes con el historial de sus compras haciendo uso de la sintaxis estándar JOIN, optimizando así el rendimiento de la base de datos frente a consultas tradicionales. La inclusión del filtro en el estado permite auditar o analizar específicamente las operaciones inactivas sin traer datos innecesarios a la memoria.
+
 ``` sql
 SELECT c.full_name, c.email, s.* 
 FROM customers AS c 
@@ -151,7 +203,17 @@ WHERE s.status = 'inactive';
 
 ![![](images/clipboard-2747926933.png)](images/clipboard-2024714984.png)
 
+## Stored Procedure
+
+![](images/clipboard-1358458763.png)
+
+![](images/clipboard-286643677.png)
+
+![](images/clipboard-3319044300.png)
+
 # 2.6 Consultas con filtros condicional LIKE
+
+Esta consulta atiende la necesidad de realizar búsquedas parciales o coincidencias de texto dentro del módulo de administración de clientes. El uso de la cláusula LIKE permite buscar registros basándose en patrones de texto en lugar de valores exactos, facilitando la localización de usuarios cuando el usuario o el sistema solo cuenta con el inicio de la dirección de correo electrónico.
 
 ``` sql
 SELECT * 
@@ -161,7 +223,7 @@ WHERE c.email LIKE 'm%';
 
 ![](images/clipboard-2547520077.png)
 
-## **Mostrar todos los correos de los clientes que contengan el dominio gmail**
+## **Mostrar todos los correos de los clientes que contengan el dominio** jemplo
 
 ``` sql
 SELECT *
@@ -187,7 +249,17 @@ WHERE s.status = 'inactive'
 
 ![](images/clipboard-3283914937.png)
 
+## Stored Procedure
+
+![](images/clipboard-3621708952.png)
+
+![](images/clipboard-1863319425.png)
+
+![](images/clipboard-1465153308.png)
+
 ## 2.7 Consultas con filtros condicionales BETWEEN
+
+Esta consulta resuelve el requerimiento de generar reportes consolidados dentro de un rango cronológico específico. Integrando datos de clientes, ventas, cuentas por cobrar, detalle de ventas y productos, se logra una trazabilidad completa de la operación comercial. La condición BETWEEN delimita el análisis a un periodo de tiempo determinado, mientras que el ordenamiento ascendente por fecha de venta facilita la lectura cronológica de las transacciones.
 
 ``` sql
 SELECT 
@@ -205,3 +277,457 @@ ORDER BY s.sale_date ASC;
 ```
 
 ![![](images/clipboard-5278111.png)](images/clipboard-3672346416.png)
+
+## Forma 2:
+
+``` sql
+SELECT c.full_name, c.email, s.sale_date, s.status, ar.issue_date, p.sku
+FROM customers c, sales s, accounts_receivable ar, sale_details sd, products p
+WHERE c.id = s.customer_id
+  AND s.id = ar.sale_id
+  AND s.id = sd.sale_id
+  AND p.id = sd.product_id
+  AND s.sale_date BETWEEN '2026-08-15 00:00:00' 
+                      AND '2026-09-17 23:59:59'
+ORDER BY s.sale_date ASC;
+```
+
+![![](images/clipboard-1310587781.png)](images/clipboard-2233497195.png)
+
+## Stored Procedure
+
+![](images/clipboard-2363389419.png)
+
+## ![](images/clipboard-153945368.png)
+
+![](images/clipboard-1374585114.png)
+
+## 2.8 Consultas con agrupamiento GROUP BY
+
+En esta parte agrupé la información para sacar resúmenes de ventas por cliente, probando dos formas distintas de filtrar los datos según lo que se necesite consultar. La primera forma usa WHERE para limitar las ventas a unas fechas específicas antes de agruparlas, lo cual ayuda a que la base de datos no trabaje de más procesando información vieja. La segunda forma usa HAVING para filtrar los resultados después de hacer las sumas, lo que sirve para buscar únicamente a los clientes que hayan comprado bastante y superen un monto determinado. Combinar ambas ideas nos permite generar reportes de ventas rápidos, ordenados y enfocados en los clientes más importantes para el negocio.
+
+## **Forma 1 con el WHERE:**
+
+``` sql
+SELECT 
+    c.id, 
+    c.full_name, 
+    SUM(s.total) AS TotalSuma, 
+    COUNT(s.id) AS CuentaTotal, 
+    AVG(s.total) AS Promedio 
+FROM customers AS c 
+JOIN sales AS s 
+    ON c.id = s.customer_id 
+WHERE s.sale_date BETWEEN '2026-08-15 00:00:00' 
+                      AND '2026-09-17 23:59:59' 
+GROUP BY c.id, c.full_name 
+ORDER BY TotalSuma DESC;
+```
+
+![![](images/clipboard-4186742505.png)](images/clipboard-621797528.png)
+
+## Forma 2 con el HAVING:
+
+``` sql
+SELECT c.id, c.full_name, SUM(s.total) AS TotalSuma, AVG(s.total) AS PromedioVenta 
+FROM customers AS c 
+JOIN sales AS s ON c.id = s.customer_id  
+GROUP BY c.id, c.full_name 
+HAVING SUM(s.total) >= 100  
+ORDER BY TotalSuma DESC;
+```
+
+![![](images/clipboard-3793654666.png)](images/clipboard-1902348430.png)
+
+## Stored Procedure
+
+![](images/clipboard-3671814137.png)
+
+![](images/clipboard-1685933665.png)
+
+## ![](images/clipboard-3979654757.png)
+
+## 2.9 Subconsultas y teoría de conjuntos
+
+Aquí busqué identificar a los clientes inactivos o que no han realizado compras dentro de un rango de fechas determinado, probando dos técnicas de la teoría de conjuntos: la subconsulta con NOT IN y la combinación con LEFT JOIN filtrando los valores nulos. Aunque ambas opciones entregan exactamente el mismo resultado, opté por la estructura con LEFT JOIN para el procedimiento almacenado porque el motor de la base de datos suele procesarla con mayor rapidez al cruzar los registros de forma directa. Esta consulta nos sirve a nivel de negocio para detectar clientes ausentes y crear campañas de reactivación o mercadeo enfocadas en ellos.
+
+``` sql
+SELECT * 
+FROM customers AS c 
+WHERE c.id NOT IN (
+    SELECT s.customer_id 
+    FROM sales AS s 
+    WHERE s.sale_date BETWEEN '2026-08-15' AND '2026-09-17'
+);
+```
+
+![](images/clipboard-3692064337.png)
+
+## Forma 2:
+
+``` sql
+SELECT * 
+FROM customers AS c 
+LEFT JOIN sales AS s 
+    ON (
+        c.id = s.customer_id 
+        AND s.sale_date BETWEEN '2026-08-15' AND '2026-09-17'
+    ) 
+WHERE s.customer_id IS NULL;
+```
+
+![](images/clipboard-3969721277.png)
+
+## Stored Procedure
+
+![![](images/clipboard-1994097068.png)](images/clipboard-2115958117.png)
+
+![](images/clipboard-1486329784.png)
+
+# creacción de triggers en la tabla sales 
+
+Para la tabla de ventas (sales), creé un sistema de auditoría mediante triggers que registra automáticamente un historial en la tabla sales_audit ante cualquier evento de inserción (INSERT), modificación (UPDATE) o eliminación (DELETE). Estos registros guardan la información estructurada en formato JSON, lo que permite auditar el estado exacto de la venta antes y después de cada cambio.
+
+## Despues de Insertar
+
+``` {.sql .sq}
+CREATE DEFINER=`admin`@`%` TRIGGER `ai_sales_audit` AFTER INSERT ON `sales` FOR EACH ROW BEGIN
+  SET @from_sales_trigger = 1;
+
+  INSERT INTO sales_audit (sale_id, actionSale, before_data, after_data)
+  VALUES (
+    NEW.id,
+    'INSERT',
+    NULL,
+    JSON_OBJECT(
+      'id', NEW.id,
+      'customer_id', NEW.customer_id,
+      'sale_date', NEW.sale_date,
+      'subtotal', NEW.subtotal,
+      'taxes', NEW.taxes,
+      'total', NEW.total,
+      'state', NEW.state,
+      'status', NEW.status,
+      'created_at', NEW.created_at,
+      'updated_at', NEW.updated_at
+    )
+  );
+
+  SET @from_sales_trigger = NULL;
+END
+```
+
+![](images/clipboard-4251206590.png)
+
+![](images/clipboard-3060444594.png)
+
+## Despues de Actualizar
+
+``` sql
+CREATE DEFINER=`admin`@`%` TRIGGER `au_sales_audit` AFTER UPDATE ON `sales` FOR EACH ROW BEGIN
+  SET @from_sales_trigger = 1;
+
+  INSERT INTO sales_audit (sale_id, actionSale, before_data, after_data)
+  VALUES (
+    NEW.id,
+    'UPDATE',
+    JSON_OBJECT(
+      'id', OLD.id,
+      'customer_id', OLD.customer_id,
+      'sale_date', OLD.sale_date,
+      'subtotal', OLD.subtotal,
+      'taxes', OLD.taxes,
+      'total', OLD.total,
+      'state', OLD.state,
+      'status', OLD.status,
+      'created_at', OLD.created_at,
+      'updated_at', OLD.updated_at
+    ),
+    JSON_OBJECT(
+      'id', NEW.id,
+      'customer_id', NEW.customer_id,
+      'sale_date', NEW.sale_date,
+      'subtotal', NEW.subtotal,
+      'taxes', NEW.taxes,
+      'total', NEW.total,
+      'state', NEW.state,
+      'status', NEW.status,
+      'created_at', NEW.created_at,
+      'updated_at', NEW.updated_at
+    )
+  );
+
+  SET @from_sales_trigger = NULL;
+END
+```
+
+![![](images/clipboard-3837821089.png)](images/clipboard-3190720633.png)
+
+## Despues de Eliminar
+
+``` sql
+CREATE DEFINER=`admin`@`%` TRIGGER `ad_sales_audit` AFTER DELETE ON `sales` FOR EACH ROW BEGIN
+  SET @from_sales_trigger = 1;
+
+  INSERT INTO sales_audit (sale_id, actionSale, before_data, after_data)
+  VALUES (
+    OLD.id,
+    'DELETE',
+    JSON_OBJECT(
+      'id', OLD.id,
+      'customer_id', OLD.customer_id,
+      'sale_date', OLD.sale_date,
+      'subtotal', OLD.subtotal,
+      'taxes', OLD.taxes,
+      'total', OLD.total,
+      'state', OLD.state,
+      'status', OLD.status,
+      'created_at', OLD.created_at,
+      'updated_at', OLD.updated_at
+    ),
+    NULL
+  );
+
+  SET @from_sales_trigger = NULL;
+END
+```
+
+![](images/clipboard-2049648380.png)
+
+![ ](images/clipboard-2769084825.png)
+
+# evidencia de cuando inserto un nuevo dato
+
+![](images/clipboard-809296386.png)
+
+![](images/clipboard-2094333278.png)
+
+# evidencia de cuando actualizo un nuevo dato
+
+![![](images/clipboard-1583138793.png)](images/clipboard-806716718.png)
+
+####  Podemos observar que el cambio que realizamos fue el del total que de estar en 119.00  lo actualizamos a 750.00 con estos datos podemos observar que nuestras tablas de auditorias estan funcionando correctamente 
+
+# creacción de triggers en la tabla products
+
+Para la tabla de productos (products), implementé un sistema de auditoría con triggers que registra de forma automática los eventos de inserción (INSERT), actualización (UPDATE) y eliminación (DELETE) en la tabla products_audit. La información se almacena en formato JSON, permitiendo rastrear el estado previo y posterior de datos críticos como precios, descripciones y estado del producto.
+
+## Despues de Insertar
+
+``` sql
+CREATE TRIGGER SuministroPro.ai_products_audit
+AFTER INSERT ON SuministroPro.products
+FOR EACH ROW
+BEGIN
+  INSERT INTO SuministroPro.products_audit (product_id, actionProduct, before_data, after_data)
+  VALUES (
+    NEW.id,
+    'INSERT',
+    NULL,
+    JSON_OBJECT(
+      'id', NEW.id,
+      'sku', NEW.sku,
+      'name', NEW.name,
+      'description', NEW.description,
+      'price', NEW.price,
+      'status', NEW.status,
+      'created_at', NEW.created_at,
+      'updated_at', NEW.updated_at
+    )
+  );
+END
+```
+
+![](images/clipboard-1616791812.png)
+
+![](images/clipboard-2266530656.png)
+
+## Despues de Actualizar
+
+``` sql
+CREATE TRIGGER SuministroPro.au_products_audit
+AFTER UPDATE ON SuministroPro.products
+FOR EACH ROW
+BEGIN
+  INSERT INTO SuministroPro.products_audit (product_id, actionProduct, before_data, after_data)
+  VALUES (
+    NEW.id,
+    'UPDATE',
+    JSON_OBJECT(
+      'id', OLD.id,
+      'sku', OLD.sku,
+      'name', OLD.name,
+      'description', OLD.description,
+      'price', OLD.price,
+      'status', OLD.status,
+      'created_at', OLD.created_at,
+      'updated_at', OLD.updated_at
+    ),
+    JSON_OBJECT(
+      'id', NEW.id,
+      'sku', NEW.sku,
+      'name', NEW.name,
+      'description', NEW.description,
+      'price', NEW.price,
+      'status', NEW.status,
+      'created_at', NEW.created_at,
+      'updated_at', NEW.updated_at
+    )
+  );
+END
+```
+
+![![](images/clipboard-2387652079.png)](images/clipboard-3057459020.png)
+
+## Despues de Eliminar
+
+``` sql
+CREATE TRIGGER SuministroPro.ad_products_audit
+AFTER DELETE ON SuministroPro.products
+FOR EACH ROW
+BEGIN
+  INSERT INTO SuministroPro.products_audit (product_id, actionProduct, before_data, after_data)
+  VALUES (
+    OLD.id,
+    'DELETE',
+    JSON_OBJECT(
+      'id', OLD.id,
+      'sku', OLD.sku,
+      'name', OLD.name,
+      'description', OLD.description,
+      'price', OLD.price,
+      'status', OLD.status,
+      'created_at', OLD.created_at,
+      'updated_at', OLD.updated_at
+    ),
+    NULL
+  );
+END
+```
+
+![![](images/clipboard-3246114954.png)](images/clipboard-4246723582.png)
+
+# evidencia de cuando actualizo un nuevo dato
+
+![](images/clipboard-914768930.png)
+
+![![](images/clipboard-2609256876.png)](images/clipboard-1202444481.png)
+
+#### podemos observar que al momento de actualizar el precio este nos muestra el valor que tenia ante con el que actualizamos que es de 1915.40 y lo actualizamos a 1950.00 por lo que podemos decir que nuestras tablas de auditorias funcionan perfectamente 
+
+# creacción de triggers en la tabla purchases
+
+Para la tabla de compras (purchases), implementé un sistema de auditoría basado en triggers que guarda automáticamente un historial en la tabla purchases_audit tras cada evento de inserción (INSERT), actualización (UPDATE) o eliminación (DELETE). La información se estructura en formato JSON para registrar los valores antiguos y nuevos de totales, fechas, proveedores y estados.
+
+## Despues de Insertar
+
+``` sql
+CREATE TRIGGER SuministroPro.ai_purchases_audit
+AFTER INSERT ON SuministroPro.purchases
+FOR EACH ROW
+BEGIN
+  INSERT INTO SuministroPro.purchases_audit (purchase_id, actionPurchase, before_data, after_data)
+  VALUES (
+    NEW.id,
+    'INSERT',
+    NULL,
+    JSON_OBJECT(
+      'id', NEW.id,
+      'supplier_id', NEW.supplier_id,
+      'purchase_date', NEW.purchase_date,
+      'subtotal', NEW.subtotal,
+      'taxes', NEW.taxes,
+      'total', NEW.total,
+      'state', NEW.state,
+      'status', NEW.status,
+      'created_at', NEW.created_at,
+      'updated_at', NEW.updated_at
+    )
+  );
+END
+```
+
+![![](images/clipboard-2201218102.png)](images/clipboard-1140758894.png)
+
+## Despues de Actualizar
+
+``` sql
+CREATE TRIGGER SuministroPro.au_purchases_audit
+AFTER UPDATE ON SuministroPro.purchases
+FOR EACH ROW
+BEGIN
+  INSERT INTO SuministroPro.purchases_audit (purchase_id, actionPurchase, before_data, after_data)
+  VALUES (
+    NEW.id,
+    'UPDATE',
+    JSON_OBJECT(
+      'id', OLD.id,
+      'supplier_id', OLD.supplier_id,
+      'purchase_date', OLD.purchase_date,
+      'subtotal', OLD.subtotal,
+      'taxes', OLD.taxes,
+      'total', OLD.total,
+      'state', OLD.state,
+      'status', OLD.status,
+      'created_at', OLD.created_at,
+      'updated_at', OLD.updated_at
+    ),
+    JSON_OBJECT(
+      'id', NEW.id,
+      'supplier_id', NEW.supplier_id,
+      'purchase_date', NEW.purchase_date,
+      'subtotal', NEW.subtotal,
+      'taxes', NEW.taxes,
+      'total', NEW.total,
+      'state', NEW.state,
+      'status', NEW.status,
+      'created_at', NEW.created_at,
+      'updated_at', NEW.updated_at
+    )
+  );
+END
+```
+
+![![](images/clipboard-2462882651.png)](images/clipboard-500697553.png)
+
+## Despues de Eliminar
+
+``` sql
+CREATE TRIGGER SuministroPro.ad_purchases_audit
+AFTER DELETE ON SuministroPro.purchases
+FOR EACH ROW
+BEGIN
+  INSERT INTO SuministroPro.purchases_audit (purchase_id, actionPurchase, before_data, after_data)
+  VALUES (
+    OLD.id,
+    'DELETE',
+    JSON_OBJECT(
+      'id', OLD.id,
+      'supplier_id', OLD.supplier_id,
+      'purchase_date', OLD.purchase_date,
+      'subtotal', OLD.subtotal,
+      'taxes', OLD.taxes,
+      'total', OLD.total,
+      'state', OLD.state,
+      'status', OLD.status,
+      'created_at', OLD.created_at,
+      'updated_at', OLD.updated_at
+    ),
+    NULL
+  );
+END
+```
+
+![![](images/clipboard-2733119888.png)](images/clipboard-1120456474.png)
+
+# evidencia de cuando actualizo un nuevo dato
+
+![](images/clipboard-965398622.png)
+
+![![](images/clipboard-3495150069.png)](images/clipboard-3936170803.png)
+
+#### podemos observar que el valor total se registro con exito antes y despues de actualizarlo ante de actualizarlo era de 114.86 y despues de actualizarlo fue de 800.00 por lo que podemos decir que nuestras tablas de auditoria funcionan correctamente 
+
+# conclusión
+
+La implementación de las vistas, consultas avanzada y el sistema de auditoría mediante triggers fortalece la arquitectura de la base de datos de SuministroPro. Al registrar automáticamente las acciones en ventas, productos y compras mediante capturas en formato JSON, el sistema garantiza un control total, trazabilidad de cambios y seguridad financiera sin afectar el rendimiento ni la experiencia operativa.
