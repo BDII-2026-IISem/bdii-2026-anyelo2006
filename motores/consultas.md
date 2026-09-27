@@ -1148,7 +1148,9 @@ FOR EACH ROW EXECUTE FUNCTION process_purchases_delete();
 
 ![](images/clipboard-757611997.png)
 
-![![](images/clipboard-3144827604.png)](images/clipboard-1248742110.png)
+![](images/clipboard-1248742110.png)
+
+![](images/clipboard-2168781126.png)
 
 #### podemos observar que en la actualizacion le sumamos un valor de 25.00 al total lo cual lo muestra perfectamente en nuestra tabla de auditoria 
 
