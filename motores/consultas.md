@@ -969,7 +969,7 @@ FOR EACH ROW EXECUTE FUNCTION process_sales_update();
 
 ![](images/clipboard-3733705788.png)
 
-## Despues de eliminar 
+## Despues de eliminar
 
 ``` sql
 CREATE OR REPLACE FUNCTION process_sales_delete()
@@ -998,7 +998,7 @@ FOR EACH ROW EXECUTE FUNCTION process_sales_delete();
 
 ![![](images/clipboard-1422623750.png)](images/clipboard-1031802441.png)
 
-#### como podemos ver yo actualice el datos sumandole 10 al total el cual podemos observa en la imagen que la tabla de auditoria si nos mostro la actualizacion 
+#### como podemos ver yo actualice el datos sumandole 10 al total el cual podemos observa en la imagen que la tabla de auditoria si nos mostro la actualizacion
 
 # **creacción de triggers en la tabla products**
 
@@ -1075,7 +1075,7 @@ FOR EACH ROW EXECUTE FUNCTION process_products_delete();
 
 ![](images/clipboard-3300741603.png)
 
-#### podemos observar que en la actualizacion le sumamos 5.00 al total y lo cual se ve reflejado en nuestra tabla de auditoria 
+#### podemos observar que en la actualizacion le sumamos 5.00 al total y lo cual se ve reflejado en nuestra tabla de auditoria
 
 # **creacción de triggers en la tabla purchases**
 
@@ -1152,8 +1152,396 @@ FOR EACH ROW EXECUTE FUNCTION process_purchases_delete();
 
 ![](images/clipboard-2168781126.png)
 
-#### podemos observar que en la actualizacion le sumamos un valor de 25.00 al total lo cual lo muestra perfectamente en nuestra tabla de auditoria 
+#### podemos observar que en la actualizacion le sumamos un valor de 25.00 al total lo cual lo muestra perfectamente en nuestra tabla de auditoria
 
 # conclusión
 
 La implementación de la migración, consultas avanzadas y el sistema de auditoría mediante triggers fortalece la arquitectura de la base de datos de SuministroPro. Al registrar automáticamente las acciones en ventas, productos y compras mediante capturas en formato JSON, el sistema garantiza un control total, trazabilidad de cambios y seguridad financiera sin afectar el rendimiento ni la experiencia operativa.
+
+# 4. Consultas avanzadas e implementación de triggers en SQL Server
+
+## 4.1 Mostrar algunos de los registros de la tabla customers
+
+Para este punto quise mostrar los datos básicos de los clientes, como su nombre completo, el tipo y número de documento, y si están activos o no en el sistema. Opté por hacer la consulta especificando exactamente esos campos en lugar de traer toda la tabla entera, porque así es más directo, se ve solo la información relevante que se necesita revisar y no cargamos la base de datos de manera innecesaria.
+
+``` sql
+SELECT full_name, document_type, document_number, status FROM customers;
+```
+
+![](images/clipboard-102749784.png)
+
+## **Stored Procedure**
+
+![](images/clipboard-962425814.png)
+
+![](images/clipboard-2735823316.png)
+
+## 4.2 Mostrar de forma ordenada (DESC) las ventas desde su comienzo
+
+En esta consulta quise revisar el historial de ventas para ver primero las más recientes y de ahí ir bajando hacia las más antiguas. Para eso seleccioné el id de la venta, la fecha, el total y el estado, y opté por usar ORDER BY con la fecha de forma descendente (DESC) para que la información quede organizada cronológicamente comenzando por las últimas transacciones realizadas.
+
+``` sql
+SELECT id, sale_date, total, status FROM sales ORDER BY sale_date DESC;
+```
+
+![](images/clipboard-2693159057.png)
+
+## Stored Procedure
+
+![](images/clipboard-4130903444.png)
+
+## ![](images/clipboard-2162122743.png)
+
+## 4.3 Consultas a múltiples tablas mediante WHERE
+
+En este punto quise relacionar las ventas con los clientes que realizaron cada compra. Para lograr esto, consulté las tablas sales y customers al mismo tiempo, utilizando alias (s y c) para simplificar el código y filtrando con la cláusula WHERE para que solo se crucen los registros donde el ID del cliente coincida en ambas tablas (c.id = s.customer_id).
+
+``` sql
+SELECT *
+FROM sales s, customers c 
+WHERE c.id = s.customer_id;
+```
+
+![![](images/clipboard-1140220240.png)![](images/clipboard-3105844118.png)![](images/clipboard-1291904566.png)](images/clipboard-3817553916.png)
+
+## Stored Procedure
+
+![](images/clipboard-2643667487.png)
+
+![![](images/clipboard-2622119438.png)](images/clipboard-3762978676.png)
+
+## 4.4 Consultas a múltiples tablas mediante JOIN
+
+Para este punto utilicé la cláusula JOIN para relacionar la tabla de clientes con la tabla de ventas de forma explícita y estándar en SQL. Seleccioné el nombre completo y el correo del cliente junto con los datos de sus ventas asociadas, uniendo ambas tablas a través de la coincidencia entre el ID del cliente y la clave foránea en ventas.
+
+``` sql
+SELECT c.full_name, c.email, s.* 
+FROM customers AS c 
+JOIN sales AS s ON (c.id = s.customer_id)
+WHERE c.id = 1;
+```
+
+![![](images/clipboard-2490328575.png)](images/clipboard-685414014.png)
+
+## Stored Procedure
+
+![](images/clipboard-1745043906.png)
+
+![](images/clipboard-1778475911.png)
+
+# 4.5 Condiciones en las Consultas o filtros
+
+Esta consulta responde a la necesidad del negocio de monitorear únicamente las operaciones vigentes en el sistema. Se aplicó el filtro por estado activo para aislar las transacciones efectivas y descartar aquellas que fueron canceladas o están inactivas, garantizando que los reportes reflejen el flujo real de ventas sin distorsionar los totales.
+
+``` sql
+SELECT *
+FROM sales s, customers c 
+WHERE c.id = s.customer_id AND s.status = 'active';
+```
+
+![![](images/clipboard-3826557653.png)](images/clipboard-1337295472.png)
+
+## Stored Procedure
+
+![](images/clipboard-3294540130.png)
+
+![](images/clipboard-2886259683.png)
+
+# 4.6 Consultas con filtros condicional LIKE
+
+Esta consulta atiende la necesidad de realizar búsquedas parciales o coincidencias de texto dentro del módulo de administración de clientes. El uso de la cláusula LIKE permite buscar registros basándose en patrones de texto en lugar de valores exactos, facilitando la localización de usuarios cuando el usuario o el sistema solo cuenta con el inicio de la dirección de correo electrónico.
+
+``` sql
+SELECT 
+    c.full_name, 
+    c.email, 
+    s.*
+FROM customers AS c
+JOIN sales AS s 
+    ON c.id = s.customer_id
+WHERE s.status = 'inactive'
+  AND c.email LIKE '%@ejemplo.com';
+```
+
+![![](images/clipboard-4034975129.png)](images/clipboard-2815714143.png)
+
+## Stored Procedure
+
+![](images/clipboard-2149353991.png)
+
+![](images/clipboard-4256479140.png)
+
+## 4.7 Consultas con filtros condicionales BETWEEN
+
+Esta consulta resuelve el requerimiento de generar reportes consolidados dentro de un rango cronológico específico. Integrando datos de clientes, ventas, cuentas por cobrar, detalle de ventas y productos, se logra una trazabilidad completa de la operación comercial. La condición BETWEEN delimita el análisis a un periodo de tiempo determinado, mientras que el ordenamiento ascendente por fecha de venta facilita la lectura cronológica de las transacciones.
+
+``` sql
+SELECT 
+    c.full_name, c.email, s.sale_date, s.status, ar.issue_date, p.sku
+FROM customers c
+JOIN sales s 
+    ON c.id = s.customer_id
+JOIN accounts_receivable ar 
+    ON s.id = ar.sale_id
+JOIN sale_details sd 
+    ON s.id = sd.sale_id
+JOIN products p ON p.id = sd.product_id
+WHERE s.sale_date BETWEEN '2026-08-15 00:00:00' AND '2026-09-17 23:59:59'
+ORDER BY s.sale_date ASC;
+```
+
+![![](images/clipboard-2848936864.png)](images/clipboard-1178857074.png)
+
+# Stored Procedure
+
+![![](images/clipboard-1374877828.png)](images/clipboard-1166263987.png)
+
+![](images/clipboard-2928061790.png)
+
+## 4.8 Consultas con agrupamiento GROUP BY
+
+En esta parte agrupé la información para sacar resúmenes de ventas por cliente, probando dos formas distintas de filtrar los datos según lo que se necesite consultar. La primera forma usa WHERE para limitar las ventas a unas fechas específicas antes de agruparlas. La segunda forma usa HAVING para filtrar los resultados después de hacer las sumas, lo que sirve para buscar únicamente a los clientes que superen un monto determinado.
+
+``` sql
+SELECT c.id, c.full_name, SUM(s.total) AS TotalSuma, AVG(s.total) AS PromedioVenta 
+FROM customers AS c 
+JOIN sales AS s ON c.id = s.customer_id  
+WHERE s.sale_date BETWEEN '2026-08-15 00:00:00' AND '2026-09-17 23:59:59'
+GROUP BY c.id, c.full_name 
+HAVING SUM(s.total) >= 100  
+ORDER BY TotalSuma DESC;
+```
+
+![](images/clipboard-2831318159.png)
+
+## Stored Procedure
+
+![](images/clipboard-1750667301.png)
+
+![](images/clipboard-1240842944.png)
+
+## 4.9 Subconsultas y teoría de conjuntos
+
+Aquí busqué identificar a los clientes inactivos o que no han realizado compras dentro de un rango de fechas determinado, probando la combinación con LEFT JOIN filtrando los valores nulos para mayor eficiencia. Esta consulta nos sirve a nivel de negocio para detectar clientes ausentes y crear campañas de reactivación.
+
+``` sql
+SELECT c.* 
+FROM customers AS c 
+LEFT JOIN sales AS s 
+    ON (
+        c.id = s.customer_id 
+        AND s.sale_date BETWEEN '2026-08-15 00:00:00' AND '2026-09-17 23:59:59'
+    ) 
+WHERE s.customer_id IS NULL;
+```
+
+![](images/clipboard-2970122769.png)
+
+## Stored Procedure
+
+![](images/clipboard-3506068325.png)
+
+![](images/clipboard-980261770.png)
+
+## Creación de triggers en la tabla sales
+
+Para la tabla sales se implementó un sistema de auditoría mediante triggers que registra automáticamente un historial en la tabla sales_audit ante operaciones de inserción, actualización y eliminación, estructurando la información mediante FOR JSON AUTO para capturar el estado antes y después de cada modificación.
+
+## Después de Insertar
+
+``` sql
+CREATE TRIGGER trg_sales_insert_audit
+ON sales
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO sales_audit (sale_id, action_sale, before_data, after_data)
+    SELECT 
+        i.id,
+        'INSERT',
+        NULL,
+        (SELECT * FROM inserted WHERE id = i.id FOR JSON AUTO, INCLUDE_NULL_VALUES)
+    FROM inserted i;
+END;
+```
+
+![](images/clipboard-4245570444.png)
+
+## Después de Actualizar 
+
+``` sql
+CREATE TRIGGER trg_sales_update_audit
+ON sales
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO sales_audit (sale_id, action_sale, before_data, after_data)
+    SELECT 
+        i.id,
+        'UPDATE',
+        (SELECT * FROM deleted WHERE id = d.id FOR JSON AUTO, INCLUDE_NULL_VALUES),
+        (SELECT * FROM inserted WHERE id = i.id FOR JSON AUTO, INCLUDE_NULL_VALUES)
+    FROM inserted i
+    INNER JOIN deleted d ON i.id = d.id;
+END;
+```
+
+![](images/clipboard-3324960962.png)
+
+## Después de Eliminar
+
+``` sql
+CREATE TRIGGER trg_sales_delete_audit
+ON sales
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO sales_audit (sale_id, action_sale, before_data, after_data)
+    SELECT 
+        d.id,
+        'DELETE',
+        (SELECT * FROM deleted WHERE id = d.id FOR JSON AUTO, INCLUDE_NULL_VALUES),
+        NULL
+    FROM deleted d;
+END;
+```
+
+![](images/clipboard-3227479877.png)
+
+## Creación de triggers en la tabla products
+
+Para la tabla products, los triggers de auditoría almacenan automáticamente las modificaciones de precios, SKUs, descripciones y estados en products_audit utilizando formato JSON.
+
+## Después de Insertar
+
+``` sql
+CREATE TRIGGER trg_products_insert_audit
+ON products
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO products_audit (product_id, action_product, before_data, after_data)
+    SELECT 
+        i.id,
+        'INSERT',
+        NULL,
+        (SELECT * FROM inserted WHERE id = i.id FOR JSON AUTO, INCLUDE_NULL_VALUES)
+    FROM inserted i;
+END;
+```
+
+![](images/clipboard-4125422979.png)
+
+## Después de Actualizar 
+
+``` sql
+CREATE TRIGGER trg_products_update_audit
+ON products
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO products_audit (product_id, action_product, before_data, after_data)
+    SELECT 
+        i.id,
+        'UPDATE',
+        (SELECT * FROM deleted WHERE id = d.id FOR JSON AUTO, INCLUDE_NULL_VALUES),
+        (SELECT * FROM inserted WHERE id = i.id FOR JSON AUTO, INCLUDE_NULL_VALUES)
+    FROM inserted i
+    INNER JOIN deleted d ON i.id = d.id;
+END;
+```
+
+![](images/clipboard-1557634912.png)
+
+## Después de Eliminar
+
+``` sql
+CREATE TRIGGER trg_products_delete_audit
+ON products
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO products_audit (product_id, action_product, before_data, after_data)
+    SELECT 
+        d.id,
+        'DELETE',
+        (SELECT * FROM deleted WHERE id = d.id FOR JSON AUTO, INCLUDE_NULL_VALUES),
+        NULL
+    FROM deleted d;
+END;
+```
+
+![](images/clipboard-2665998297.png)
+
+## Creación de triggers en la tabla purchases
+
+Para la tabla purchases, el sistema de auditoría recopila y estructura mediante JSON las transacciones de abastecimiento, totales, impuestos y estados de proveedores en la tabla purchases_audit.
+
+## Después de Insertar 
+
+``` sql
+CREATE TRIGGER trg_purchases_insert_audit
+ON purchases
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO purchases_audit (purchase_id, action_purchase, before_data, after_data)
+    SELECT 
+        i.id,
+        'INSERT',
+        NULL,
+        (SELECT * FROM inserted WHERE id = i.id FOR JSON AUTO, INCLUDE_NULL_VALUES)
+    FROM inserted i;
+END;
+```
+
+![](images/clipboard-1895264182.png)
+
+## Después de Actualizar 
+
+``` sql
+CREATE TRIGGER trg_purchases_update_audit
+ON purchases
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO purchases_audit (purchase_id, action_purchase, before_data, after_data)
+    SELECT 
+        i.id,
+        'UPDATE',
+        (SELECT * FROM deleted WHERE id = d.id FOR JSON AUTO, INCLUDE_NULL_VALUES),
+        (SELECT * FROM inserted WHERE id = i.id FOR JSON AUTO, INCLUDE_NULL_VALUES)
+    FROM inserted i
+    INNER JOIN deleted d ON i.id = d.id;
+END;
+```
+
+![](images/clipboard-2836726489.png)
+
+## Después de Eliminar
+
+``` sql
+CREATE TRIGGER trg_purchases_delete_audit
+ON purchases
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO purchases_audit (purchase_id, action_purchase, before_data, after_data)
+    SELECT 
+        d.id,
+        'DELETE',
+        (SELECT * FROM deleted WHERE id = d.id FOR JSON AUTO, INCLUDE_NULL_VALUES),
+        NULL
+    FROM deleted d;
+END;
+```
+
+![](images/clipboard-2311686489.png)
+
+## verificacion cuando actualizo un dato
+
+![](images/clipboard-3427696473.png)
+
+## **Conclusión:**
+
+El proceso realizado en SQL Server demostró la importancia de estructurar correctamente las consultas y encapsularlas en Stored Procedures para optimizar la interacción con la base de datos. Asimismo, la implementación de restricciones (CHECK constraints) y triggers de auditoría con formato JSON permitió garantizar la integridad transaccional y registrar de forma automatizada e histórica cualquier cambio o modificación realizada en las tablas principales.
