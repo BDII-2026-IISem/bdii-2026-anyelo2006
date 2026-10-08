@@ -1545,3 +1545,447 @@ END;
 ## **Conclusión:**
 
 El proceso realizado en SQL Server demostró la importancia de estructurar correctamente las consultas y encapsularlas en Stored Procedures para optimizar la interacción con la base de datos. Asimismo, la implementación de restricciones (CHECK constraints) y triggers de auditoría con formato JSON permitió garantizar la integridad transaccional y registrar de forma automatizada e histórica cualquier cambio o modificación realizada en las tablas principales.
+
+# 5. Consultas avanzadas, procedimientos almacenados y triggers en Oracle
+
+## 5.1 Mostrar algunos de los registros de la tabla customers
+
+Para este punto quise mostrar los datos básicos de los clientes, como su nombre completo, el tipo y número de documento, y si están activos o no en el sistema. Opté por hacer la consulta especificando exactamente esos campos en lugar de traer toda la tabla entera, porque así es más directo, se ve solo la información relevante que se necesita revisar y no cargamos la base de datos de manera innecesaria.
+
+``` sql
+SELECT full_name, document_type, document_number, status FROM customers;
+```
+
+![](images/clipboard-1920786828.png)
+
+## 5.2 Mostrar de forma ordenada (DESC) las ventas desde su comienzo
+
+En esta consulta quise revisar el historial de ventas para ver primero las más recientes y de ahí ir bajando hacia las más antiguas. Para eso seleccioné el id de la venta, la fecha, el total y el estado, y opté por usar ORDER BY con la fecha de forma descendente (DESC) para que la información quede organizada cronológicamente comenzando por las últimas transacciones realizadas.
+
+``` sql
+SELECT id, sale_date, total, status FROM sales ORDER BY sale_date DESC;
+```
+
+![](images/clipboard-1615601520.png)
+
+## 5.3 Consultas a múltiples tablas mediante WHERE
+
+En este punto quise relacionar las ventas con los clientes que realizaron cada compra. Para lograr esto, consulté las tablas sales y customers al mismo tiempo, utilizando alias (s y c) para simplificar el código y filtrando con la cláusula WHERE para que solo se crucen los registros donde el ID del cliente coincida en ambas tablas (c.id = s.customer_id).
+
+``` sql
+SELECT *
+FROM sales s, customers c 
+WHERE c.id = s.customer_id;
+```
+
+![![](images/clipboard-1912423973.png)](images/clipboard-1672994455.png)
+
+## 5.4 Consultas a múltiples tablas mediante JOIN
+
+Para este punto utilicé la cláusula JOIN para relacionar la tabla de clientes con la tabla de ventas de forma explícita y estándar en SQL. Seleccioné el nombre completo y el correo del cliente junto con los datos de sus ventas asociadas, uniendo ambas tablas a través de la coincidencia entre el ID del cliente y la clave foránea en ventas.
+
+``` sql
+SELECT c.full_name, c.email, s.* 
+FROM customers c 
+JOIN sales s ON (c.id = s.customer_id)
+WHERE c.id = 1;
+```
+
+![![](images/clipboard-482105308.png)](images/clipboard-2353317545.png)
+
+## 5.5 Condiciones en las Consultas o filtros en las Consultas
+
+Esta consulta responde a la necesidad del negocio de monitorear únicamente las operaciones vigentes en el sistema. Se aplicó el filtro por estado activo para aislar las transacciones efectivas y descartar aquellas que fueron canceladas o están inactivas, garantizando que los reportes reflejen el flujo real de ventas sin distorsionar los totales.
+
+``` sql
+SELECT *
+FROM sales s, customers c 
+WHERE c.id = s.customer_id AND s.status = 'active';
+```
+
+![![](images/clipboard-4236949336.png)](images/clipboard-3568865682.png)
+
+## 5.6 Consultas con filtros condicional LIKE
+
+Esta consulta atiende la necesidad de realizar búsquedas parciales o coincidencias de texto dentro del módulo de administración de clientes. El uso de la cláusula LIKE permite buscar registros basándose en patrones de texto en lugar de valores exactos, facilitando la localización de usuarios cuando el usuario o el sistema solo cuenta con el inicio de la dirección de correo electrónico.
+
+``` sql
+SELECT 
+    c.full_name, 
+    c.email, 
+    s.*
+FROM customers c
+JOIN sales s ON c.id = s.customer_id
+WHERE s.status = 'inactive'
+  AND c.email LIKE '%@ejemplo.com';
+```
+
+![![](images/clipboard-2523974993.png)](images/clipboard-4021945709.png)
+
+## 5.7 Consultas con filtros condicionales BETWEEN
+
+Esta consulta resuelve el requerimiento de generar reportes consolidados dentro de un rango cronológico específico. Integrando datos de clientes, ventas, cuentas por cobrar, detalle de ventas y productos, se logra una trazabilidad completa de la operación comercial. La condición BETWEEN delimita el análisis a un periodo de tiempo determinado, mientras que el ordenamiento ascendente por fecha de venta facilita la lectura cronológica de las transacciones.
+
+``` sql
+SELECT 
+    c.full_name, c.email, s.sale_date, s.status, ar.issue_date, p.sku
+FROM customers c
+JOIN sales s ON c.id = s.customer_id
+JOIN accounts_receivable ar ON s.id = ar.sale_id
+JOIN sale_details sd ON s.id = sd.sale_id
+JOIN products p ON p.id = sd.product_id
+WHERE s.sale_date BETWEEN TO_DATE('2026-08-15 00:00:00', 'YYYY-MM-DD HH24:MI:SS') 
+                      AND TO_DATE('2026-09-17 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+ORDER BY s.sale_date ASC;
+```
+
+![![](images/clipboard-2470328942.png)](images/clipboard-2662815564.png)
+
+# 5.8 Consultas con agrupamiento GROUP BY
+
+En esta parte agrupé la información para sacar resúmenes de ventas por cliente, probando dos formas distintas de filtrar los datos según lo que se necesite consultar. La primera forma usa WHERE para limitar las ventas a unas fechas específicas antes de agruparlas. La segunda forma usa HAVING para filtrar los resultados después de hacer las sumas, lo que sirve para buscar únicamente a los clientes que superen un monto determinado.
+
+``` sql
+SELECT c.id, c.full_name, SUM(s.total) AS TotalSuma, AVG(s.total) AS PromedioVenta 
+FROM customers c 
+JOIN sales s ON c.id = s.customer_id  
+WHERE s.sale_date BETWEEN TO_DATE('2026-08-15 00:00:00', 'YYYY-MM-DD HH24:MI:SS') 
+                      AND TO_DATE('2026-09-17 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+GROUP BY c.id, c.full_name 
+HAVING SUM(s.total) >= 100  
+ORDER BY TotalSuma DESC;
+```
+
+![](images/clipboard-215252528.png)
+
+## 5.9 Subconsultas y teoría de conjuntos
+
+Aquí busqué identificar a los clientes inactivos o que no han realizado compras dentro de un rango de fechas determinado, probando la combinación con LEFT JOIN filtrando los valores nulos para mayor eficiencia. Esta consulta nos sirve a nivel de negocio para detectar clientes ausentes y crear campañas de reactivación.
+
+``` sql
+SELECT c.* 
+FROM customers c 
+LEFT JOIN sales s ON (
+    c.id = s.customer_id 
+    AND s.sale_date BETWEEN TO_DATE('2026-08-15 00:00:00', 'YYYY-MM-DD HH24:MI:SS') 
+                        AND TO_DATE('2026-09-17 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+) 
+WHERE s.customer_id IS NULL;
+```
+
+![![](images/clipboard-3313125761.png)](images/clipboard-4194394681.png)
+
+# Creación de triggers en la tabla sales
+
+La tabla sales la usamos principalmente para llevar el control y el registro de todas las ventas que se van realizando en el sistema. Básicamente, aquí se guarda la cabecera de cada factura o transacción; es decir, cada registro cuenta con su propio identificador y se conecta con el cliente que hizo la compra por medio de su código respectivo. También nos permite almacenar la fecha exacta en la que se hizo la venta junto con sus respectivas marcas de auditoría para saber cuándo se creó o se modificó el registro. En cuanto a la parte de dinero, la tabla divide muy bien los montos registrando el subtotal, los impuestos calculados y el valor final o total a pagar. Por último, incluye campos especiales para manejar el estado y la situación actual de cada venta dentro del flujo del negocio.
+
+## Después de Insertar 
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_sales_insert_audit
+AFTER INSERT ON sales
+FOR EACH ROW
+BEGIN
+    INSERT INTO sales_audit (sale_id, action_sale, before_data, after_data)
+    VALUES (
+        :NEW.id,
+        'INSERT',
+        NULL,
+        JSON_OBJECT(
+            'id' IS :NEW.id,
+            'customer_id' IS :NEW.customer_id,
+            'sale_date' IS :NEW.sale_date,
+            'subtotal' IS :NEW.subtotal,
+            'taxes' IS :NEW.taxes,
+            'total' IS :NEW.total,
+            'state' IS :NEW.state,
+            'status' IS :NEW.status,
+            'created_at' IS :NEW.created_at,
+            'updated_at' IS :NEW.updated_at
+        )
+    );
+END;
+```
+
+![](images/clipboard-4098965724.png)
+
+## Después de Actualizar
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_sales_update_audit
+AFTER UPDATE ON sales
+FOR EACH ROW
+BEGIN
+    INSERT INTO sales_audit (sale_id, action_sale, before_data, after_data)
+    VALUES (
+        :NEW.id,
+        'UPDATE',
+        JSON_OBJECT(
+            'id' IS :OLD.id,
+            'customer_id' IS :OLD.customer_id,
+            'sale_date' IS :OLD.sale_date,
+            'subtotal' IS :OLD.subtotal,
+            'taxes' IS :OLD.taxes,
+            'total' IS :OLD.total,
+            'state' IS :OLD.state,
+            'status' IS :OLD.status,
+            'created_at' IS :OLD.created_at,
+            'updated_at' IS :OLD.updated_at
+        ),
+        JSON_OBJECT(
+            'id' IS :NEW.id,
+            'customer_id' IS :NEW.customer_id,
+            'sale_date' IS :NEW.sale_date,
+            'subtotal' IS :NEW.subtotal,
+            'taxes' IS :NEW.taxes,
+            'total' IS :NEW.total,
+            'state' IS :NEW.state,
+            'status' IS :NEW.status,
+            'created_at' IS :NEW.created_at,
+            'updated_at' IS :NEW.updated_at
+        )
+    );
+END;
+```
+
+![](images/clipboard-1048535177.png)
+
+## Después de Eliminar
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_sales_delete_audit
+AFTER DELETE ON sales
+FOR EACH ROW
+BEGIN
+    INSERT INTO sales_audit (sale_id, action_sale, before_data, after_data)
+    VALUES (
+        :OLD.id,
+        'DELETE',
+        JSON_OBJECT(
+            'id' IS :OLD.id,
+            'customer_id' IS :OLD.customer_id,
+            'sale_date' IS :OLD.sale_date,
+            'subtotal' IS :OLD.subtotal,
+            'taxes' IS :OLD.taxes,
+            'total' IS :OLD.total,
+            'state' IS :OLD.state,
+            'status' IS :OLD.status,
+            'created_at' IS :OLD.created_at,
+            'updated_at' IS :OLD.updated_at
+        ),
+        NULL
+    );
+END;
+```
+
+![](images/clipboard-1146074211.png)
+
+## Creación de triggers en la tabla products
+
+La tabla products la utilizamos para almacenar y administrar todo el catálogo de artículos o mercancías disponibles en el sistema. En ella se registra la información esencial de cada producto, comenzando por su identificador único y su código de referencia o SKU, los cuales nos permiten identificarlo de forma rápida. También guardamos el nombre comercial y una breve descripción para detallar las características del artículo. En el aspecto financiero, la tabla maneja el precio unitario del producto con precisión decimal, además de incluir un campo para controlar su estado actual dentro del inventario. Por último, cuenta con sus respectivas marcas de tiempo para llevar el control exacto de cuándo se dio de alta el producto o cuándo sufrió alguna modificación.
+
+## Después de Insertar
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_products_insert_audit
+AFTER INSERT ON products
+FOR EACH ROW
+BEGIN
+    INSERT INTO products_audit (product_id, action_product, before_data, after_data)
+    VALUES (
+        :NEW.id,
+        'INSERT',
+        NULL,
+        JSON_OBJECT(
+            'id' IS :NEW.id,
+            'sku' IS :NEW.sku,
+            'name' IS :NEW.name,
+            'description' IS :NEW.description,
+            'price' IS :NEW.price,
+            'status' IS :NEW.status,
+            'created_at' IS :NEW.created_at,
+            'updated_at' IS :NEW.updated_at
+        )
+    );
+END;
+```
+
+![](images/clipboard-2484290597.png)
+
+## Después de Actualizar
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_products_update_audit
+AFTER UPDATE ON products
+FOR EACH ROW
+BEGIN
+    INSERT INTO products_audit (product_id, action_product, before_data, after_data)
+    VALUES (
+        :NEW.id,
+        'UPDATE',
+        JSON_OBJECT(
+            'id' IS :OLD.id,
+            'sku' IS :OLD.sku,
+            'name' IS :OLD.name,
+            'description' IS :OLD.description,
+            'price' IS :OLD.price,
+            'status' IS :OLD.status,
+            'created_at' IS :OLD.created_at,
+            'updated_at' IS :OLD.updated_at
+        ),
+        JSON_OBJECT(
+            'id' IS :NEW.id,
+            'sku' IS :NEW.sku,
+            'name' IS :NEW.name,
+            'description' IS :NEW.description,
+            'price' IS :NEW.price,
+            'status' IS :NEW.status,
+            'created_at' IS :NEW.created_at,
+            'updated_at' IS :NEW.updated_at
+        )
+    );
+END;
+```
+
+![](images/clipboard-3534491675.png)
+
+## Después de Eliminar 
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_products_delete_audit
+AFTER DELETE ON products
+FOR EACH ROW
+BEGIN
+    INSERT INTO products_audit (product_id, action_product, before_data, after_data)
+    VALUES (
+        :OLD.id,
+        'DELETE',
+        JSON_OBJECT(
+            'id' IS :OLD.id,
+            'sku' IS :OLD.sku,
+            'name' IS :OLD.name,
+            'description' IS :OLD.description,
+            'price' IS :OLD.price,
+            'status' IS :OLD.status,
+            'created_at' IS :OLD.created_at,
+            'updated_at' IS :OLD.updated_at
+        ),
+        NULL
+    );
+END;
+```
+
+![](images/clipboard-743120898.png)
+
+## Creación de triggers en la tabla purchases
+
+La tabla purchases se encarga de registrar y administrar todas las operaciones de abastecimiento o compras de mercancía realizadas a los diferentes proveedores del sistema. En su estructura principal se almacena el identificador único de la compra junto con el código del proveedor asociado, permitiendo un control exacto de quién nos suministró los productos. Asimismo, la tabla maneja la fecha de la transacción y los valores financieros detallados, tales como el subtotal, los impuestos calculados y el valor total a pagar. Cuenta también con campos para gestionar el estado administrativo y las condiciones de la orden, acompañados de sus respectivas marcas de tiempo para asegurar una trazabilidad completa desde su registro inicial hasta cualquier modificación posterior.
+
+## Después de Insertar 
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_purchases_insert_audit
+AFTER INSERT ON purchases
+FOR EACH ROW
+BEGIN
+    INSERT INTO purchases_audit (purchase_id, action_purchase, before_data, after_data)
+    VALUES (
+        :NEW.id,
+        'INSERT',
+        NULL,
+        JSON_OBJECT(
+            'id' IS :NEW.id,
+            'supplier_id' IS :NEW.supplier_id,
+            'purchase_date' IS :NEW.purchase_date,
+            'subtotal' IS :NEW.subtotal,
+            'taxes' IS :NEW.taxes,
+            'total' IS :NEW.total,
+            'state' IS :NEW.state,
+            'status' IS :NEW.status,
+            'created_at' IS :NEW.created_at,
+            'updated_at' IS :NEW.updated_at
+        )
+    );
+END;
+```
+
+![](images/clipboard-2808203987.png)
+
+## Después de Actualizar
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_purchases_update_audit
+AFTER UPDATE ON purchases
+FOR EACH ROW
+BEGIN
+    INSERT INTO purchases_audit (purchase_id, action_purchase, before_data, after_data)
+    VALUES (
+        :NEW.id,
+        'UPDATE',
+        JSON_OBJECT(
+            'id' IS :OLD.id,
+            'supplier_id' IS :OLD.supplier_id,
+            'purchase_date' IS :OLD.purchase_date,
+            'subtotal' IS :OLD.subtotal,
+            'taxes' IS :OLD.taxes,
+            'total' IS :OLD.total,
+            'state' IS :OLD.state,
+            'status' IS :OLD.status,
+            'created_at' IS :OLD.created_at,
+            'updated_at' IS :OLD.updated_at
+        ),
+        JSON_OBJECT(
+            'id' IS :NEW.id,
+            'supplier_id' IS :NEW.supplier_id,
+            'purchase_date' IS :NEW.purchase_date,
+            'subtotal' IS :NEW.subtotal,
+            'taxes' IS :NEW.taxes,
+            'total' IS :NEW.total,
+            'state' IS :NEW.state,
+            'status' IS :NEW.status,
+            'created_at' IS :NEW.created_at,
+            'updated_at' IS :NEW.updated_at
+        )
+    );
+END;
+```
+
+![](images/clipboard-3116675323.png)
+
+## Después de Eliminar 
+
+``` sql
+CREATE OR REPLACE TRIGGER trg_purchases_delete_audit
+AFTER DELETE ON purchases
+FOR EACH ROW
+BEGIN
+    INSERT INTO purchases_audit (purchase_id, action_purchase, before_data, after_data)
+    VALUES (
+        :OLD.id,
+        'DELETE',
+        JSON_OBJECT(
+            'id' IS :OLD.id,
+            'supplier_id' IS :OLD.supplier_id,
+            'purchase_date' IS :OLD.purchase_date,
+            'subtotal' IS :OLD.subtotal,
+            'taxes' IS :OLD.taxes,
+            'total' IS :OLD.total,
+            'state' IS :OLD.state,
+            'status' IS :OLD.status,
+            'created_at' IS :OLD.created_at,
+            'updated_at' IS :OLD.updated_at
+        ),
+        NULL
+    );
+END;
+```
+
+![](images/clipboard-1524104117.png)
+
+## **verificacion cuando actualizo un dato**
+
+![](images/clipboard-2287695690.png)
+
+## **Conclusión:**
+
+El proceso realizado en Oracle Database (PL/SQL) permitió trasladar exitosamente la arquitectura de consultas avanzadas, procedimientos almacenados y el sistema de auditoría del proyecto. Mediante el uso de triggers independientes para las operaciones de inserción, actualización y eliminación, combinados con las funciones nativas de Oracle como JSON_OBJECT y almacenamiento en campos CLOB, se logró garantizar una trazabilidad financiera y un control de cambios transparente, seguro y automatizado sobre las tablas principales de la base de datos.
