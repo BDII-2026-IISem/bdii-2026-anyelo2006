@@ -1367,7 +1367,7 @@ END;
 
 ![](images/clipboard-4245570444.png)
 
-## Después de Actualizar 
+## Después de Actualizar
 
 ``` sql
 CREATE TRIGGER trg_sales_update_audit
@@ -1432,7 +1432,7 @@ END;
 
 ![](images/clipboard-4125422979.png)
 
-## Después de Actualizar 
+## Después de Actualizar
 
 ``` sql
 CREATE TRIGGER trg_products_update_audit
@@ -1477,7 +1477,7 @@ END;
 
 Para la tabla purchases, el sistema de auditoría recopila y estructura mediante JSON las transacciones de abastecimiento, totales, impuestos y estados de proveedores en la tabla purchases_audit.
 
-## Después de Insertar 
+## Después de Insertar
 
 ``` sql
 CREATE TRIGGER trg_purchases_insert_audit
@@ -1497,7 +1497,7 @@ END;
 
 ![](images/clipboard-1895264182.png)
 
-## Después de Actualizar 
+## Después de Actualizar
 
 ``` sql
 CREATE TRIGGER trg_purchases_update_audit
@@ -1679,7 +1679,7 @@ WHERE s.customer_id IS NULL;
 
 La tabla sales la usamos principalmente para llevar el control y el registro de todas las ventas que se van realizando en el sistema. Básicamente, aquí se guarda la cabecera de cada factura o transacción; es decir, cada registro cuenta con su propio identificador y se conecta con el cliente que hizo la compra por medio de su código respectivo. También nos permite almacenar la fecha exacta en la que se hizo la venta junto con sus respectivas marcas de auditoría para saber cuándo se creó o se modificó el registro. En cuanto a la parte de dinero, la tabla divide muy bien los montos registrando el subtotal, los impuestos calculados y el valor final o total a pagar. Por último, incluye campos especiales para manejar el estado y la situación actual de cada venta dentro del flujo del negocio.
 
-## Después de Insertar 
+## Después de Insertar
 
 ``` sql
 CREATE OR REPLACE TRIGGER trg_sales_insert_audit
@@ -1849,7 +1849,7 @@ END;
 
 ![](images/clipboard-3534491675.png)
 
-## Después de Eliminar 
+## Después de Eliminar
 
 ``` sql
 CREATE OR REPLACE TRIGGER trg_products_delete_audit
@@ -1881,7 +1881,7 @@ END;
 
 La tabla purchases se encarga de registrar y administrar todas las operaciones de abastecimiento o compras de mercancía realizadas a los diferentes proveedores del sistema. En su estructura principal se almacena el identificador único de la compra junto con el código del proveedor asociado, permitiendo un control exacto de quién nos suministró los productos. Asimismo, la tabla maneja la fecha de la transacción y los valores financieros detallados, tales como el subtotal, los impuestos calculados y el valor total a pagar. Cuenta también con campos para gestionar el estado administrativo y las condiciones de la orden, acompañados de sus respectivas marcas de tiempo para asegurar una trazabilidad completa desde su registro inicial hasta cualquier modificación posterior.
 
-## Después de Insertar 
+## Después de Insertar
 
 ``` sql
 CREATE OR REPLACE TRIGGER trg_purchases_insert_audit
@@ -1952,7 +1952,7 @@ END;
 
 ![](images/clipboard-3116675323.png)
 
-## Después de Eliminar 
+## Después de Eliminar
 
 ``` sql
 CREATE OR REPLACE TRIGGER trg_purchases_delete_audit
